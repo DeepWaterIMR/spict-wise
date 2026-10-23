@@ -43,12 +43,18 @@ duplicating it.
 
 ## Step 3 — Install the skills globally
 
-Copy the `spict-*` skills into the agent's user-level skills folder so they work in every
-project:
+Sync the `spict-*` skill folders individually into the agent's user-level skills folder so they
+work in every project:
 
 - Claude Code → `~/.claude/skills/`
 - Codex → `~/.agents/skills/`
 - Other agents → point their instructions at `<spict-wise>/skills/`
+
+Leave a destination symlink in place when it resolves to that source skill; repository updates
+then appear automatically. Skip any source and destination that resolve to the same path. If a
+differing directory or link already occupies that skill's destination, move that single entry to
+a timestamped backup before copying the source skill folder there. Never copy the pack tree onto
+itself, delete a skills root, or touch unrelated skill entries.
 
 Record the install in `~/.spict-wise/config.json`; legacy
 `~/.spict-template/config.json` remains a scaffold fallback and uses the same

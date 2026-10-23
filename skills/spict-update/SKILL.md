@@ -33,9 +33,13 @@ pulled. Offer to run `academic-writing-update` in the same pass.
 
 ## Step 4 — Re-sync the skills
 
-Copy the updated `skills/spict-*` into the agent's user-level skills folder
-(`~/.claude/skills/` for Claude Code, `~/.agents/skills/` for Codex), overwriting the old
-copies. Touch only `spict-*`; leave the `academic-*`, `index-*`, and `biotic-*` skills alone.
+Reconcile only this pack's `spict-*` entries in the locations used by the installed agents
+(`~/.claude/skills/` for Claude Code, `~/.agents/skills/` for Codex). Leave a destination
+symlink in place when it resolves to the matching source skill; updates to the repository then
+appear automatically. Skip any source and destination that resolve to the same path. Before
+replacing a differing directory or link, move that single entry to a timestamped backup. Never
+copy the pack tree onto itself, delete a skills root, or touch the `academic-*`, `index-*`, and
+`biotic-*` entries.
 
 ## Step 5 — Report
 

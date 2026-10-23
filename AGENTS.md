@@ -1,5 +1,9 @@
 # AGENTS.md — spict-wise
 
+spict-wise is part of [Fiskwise](https://deepwaterimr.github.io/fiskwise/). See the
+[ecosystem repository](https://github.com/DeepWaterIMR/fiskwise) for the canonical pack
+names and migration guide. Existing skill IDs and scientific interfaces remain stable.
+
 You are helping a scientist at the **Institute of Marine Research** (IMR /
 Havforskningsinstituttet, Norway) run a **SPiCT** stock assessment — the Surplus Production
 model in Continuous Time of **Pedersen & Berg (2017)**, *Fish and Fisheries*

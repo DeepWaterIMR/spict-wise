@@ -1,5 +1,9 @@
 # CLAUDE.md — spict-wise (Claude Code)
 
+spict-wise is part of [Fiskwise](https://deepwaterimr.github.io/fiskwise/). See the
+[ecosystem repository](https://github.com/DeepWaterIMR/fiskwise) for the canonical pack
+names and migration guide. Existing skill IDs and scientific interfaces remain stable.
+
 This is the **Claude Code** pointer. The full agent contract is in [`AGENTS.md`](AGENTS.md) —
 read it. This file only adds Claude-specific notes.
 
