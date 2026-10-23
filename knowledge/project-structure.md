@@ -1,12 +1,12 @@
 # The generated project structure
 
-`spict-new-assessment` produces a **new project folder** for one stock. spict-template itself is
+`spict-new-assessment` produces a **new project folder** for one stock. spict-wise itself is
 never this structure.
 
-The layout is academic-writing's, unchanged, plus what a SPiCT assessment needs. The base is
-laid down by academic-writing's `scaffold_document()`; spict-template overlays the R helpers,
+The layout is wise-writing's, unchanged, plus what a SPiCT assessment needs. The base is
+laid down by wise-writing's `scaffold_document()`; spict-wise overlays the R helpers,
 the three documents' SPiCT content, and the stock-specific `config.yaml` fields. See
-[`academic-writing.md`](academic-writing.md) for the contract that governs everything under
+[`wise-writing.md`](wise-writing.md) for the contract that governs everything under
 `docs/`.
 
 ```
@@ -17,9 +17,9 @@ the three documents' SPiCT content, and the stock-specific `config.yaml` fields.
 ├── .here / _quarto.yml      # Project root and editor-preview execution directory
 ├── .gitignore
 ├── R/
-│   ├── 0_setup.R            # academic-writing: packages, config, theme, figure widths
-│   ├── report_helpers.R     # academic-writing: fmt(), list_values(), spell_number()
-│   ├── docx_postprocess.R   # academic-writing: unwraps Quarto's Word float wrappers
+│   ├── 0_setup.R            # wise-writing: packages, config, theme, figure widths
+│   ├── report_helpers.R     # wise-writing: fmt(), list_values(), spell_number()
+│   ├── docx_postprocess.R   # wise-writing: unwraps Quarto's Word float wrappers
 │   ├── 1_process_catches.R  # Raw catch sources -> the SPiCT catch series
 │   ├── 2_prepare_index.R    # Producer output -> year/est/se
 │   ├── spict_helpers.R      # SPiCT package loading, input building, spictRisk()
@@ -51,7 +51,7 @@ the three documents' SPiCT content, and the stock-specific `config.yaml` fields.
 └── config/                  # Tooling configuration, separate from analysis settings
 ```
 
-`shiny/` is spict-template's one addition to the academic-writing layout. Everything else
+`shiny/` is spict-wise's one addition to the wise-writing layout. Everything else
 matches, so an analyst moving between an index project, a SPiCT project, and a manuscript finds
 the same folders in the same places.
 
@@ -75,7 +75,7 @@ the same folders in the same places.
 **Stamped into paths and document YAML by `scaffold.R`** (changing one afterwards means editing
 the documents too):
 
-`PROJECT_TITLE`, `PROJECT_SLUG`, `PROJECT_YEAR`, `AUTHORS`, `AFFILIATIONS` (academic-writing's
+`PROJECT_TITLE`, `PROJECT_SLUG`, `PROJECT_YEAR`, `AUTHORS`, `AFFILIATIONS` (wise-writing's
 schema — accountable humans, never invented), `STOCK_NAME` (display name for prose),
 `STOCK_SLUG` (kebab-case, used in filenames), `STOCK_NAME_SNAKE` (snake_case, used in object
 and file names), `STOCK_LATIN`, `STOCK_CODE`, `ICES_AREAS`, `ICES_STOCK_ID`, `WORKING_GROUP`,
@@ -97,7 +97,7 @@ and file names), `STOCK_LATIN`, `STOCK_CODE`, `ICES_AREAS`, `ICES_STOCK_ID`, `WO
 | `PRODUCTION_MODEL` | `schaefer` fixes `logn`; anything else is a benchmark decision |
 | `BLIM_BMSY` / `BTRIGGER_BMSY` / `FLIM_FMSY` | Reference-point conventions |
 | `NRETROYEARS` / `NHINDCASTYEARS` | Peels for the retrospective and hindcast |
-| `BASE_SIZE`, `FIG_WIDTH_*`, `CSL`, `BIBLIOGRAPHY`, paths | academic-writing's settings |
+| `BASE_SIZE`, `FIG_WIDTH_*`, `CSL`, `BIBLIOGRAPHY`, paths | wise-writing's settings |
 
 ## The canonical year parameters
 

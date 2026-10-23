@@ -1,36 +1,41 @@
 ---
 name: spict-install
-description: Install or set up spict-template for building SPiCT biomass-dynamic stock assessments. Use when the user says "install spict-template", "install https://github.com/DeepWaterIMR/spict-template", "set up spict-template", or first asks to run a SPiCT assessment and spict-template is not yet installed. Runs onboarding: ensure academic-writing, clone spict-template, install skills globally, verify the spict toolchain.
+description: Install or set up spict-wise for building SPiCT biomass-dynamic stock assessments. Use when the user says "install spict-wise", "install https://github.com/DeepWaterIMR/spict-wise", "set up spict-wise", or first asks to run a SPiCT assessment and spict-wise is not yet installed. Runs onboarding: ensure wise-writing, clone spict-wise, install skills globally, verify the spict toolchain.
 ---
 
-# Install spict-template
+# Install spict-wise
 
-Goal: get spict-template working **once per machine** so it is available in every project — not
-cloned into each stock repository. spict-template builds on academic-writing, so that must be
+Goal: get spict-wise working **once per machine** so it is available in every project — not
+cloned into each stock repository. spict-wise builds on wise-writing, so that must be
 present first.
 
-> Trigger: the user prompts *"install https://github.com/DeepWaterIMR/spict-template"* (or
+> Trigger: the user prompts *"install https://github.com/DeepWaterIMR/spict-wise"* (or
 > similar), or asks to run a SPiCT assessment with nothing installed yet.
 
-## Step 1 — academic-writing first
+## Step 1 — wise-writing first
 
-spict-template does not carry its own project skeleton, style rules, or rendering pipeline: it
-overlays academic-writing's. Without it, `scaffold_spict()` cannot run.
+spict-wise does not carry its own project skeleton, style rules, or rendering pipeline: it
+overlays wise-writing's. Without it, `scaffold_spict()` cannot run.
 
-1. Check `~/.academic-writing/config.json`. If academic-writing is **not** installed, run its
-   `academic-writing-install` skill (`install https://github.com/DeepWaterIMR/academic-writing`)
-   before going on.
+1. Check `~/.wise-writing/config.json` first, then legacy
+   `~/.academic-writing/config.json`; both use `academic_writing_path`. If wise-writing is
+   **not** installed, run its `academic-writing-install` skill
+   (`install https://github.com/DeepWaterIMR/wise-writing`) before going on.
 2. Confirm the `academic-style`, `academic-conventions`, `academic-data-report`,
    `academic-assessment-report`, and `academic-advice-sheet` skills are available.
 
-## Step 2 — Clone spict-template
+## Step 2 — Clone spict-wise
 
-Clone it beside academic-writing (read `academic_writing_path` from that config and use its
-parent), or another user-space location the user prefers. **Never clone at a filesystem root or
-a system directory** — refuse and suggest a safe location.
+Before cloning, reuse an existing installation recorded in `~/.spict-wise/config.json` or the
+legacy `~/.spict-template/config.json`; both use `spict_template_path`, and the new config takes
+precedence when both exist.
+
+Clone it beside wise-writing (read `academic_writing_path` from that config and use its parent),
+or another user-space location the user prefers. **Never clone at a filesystem root or a system
+directory** — refuse and suggest a safe location.
 
 ```bash
-git clone https://github.com/DeepWaterIMR/spict-template "<path>/spict-template"
+git clone https://github.com/DeepWaterIMR/spict-wise "<path>/spict-wise"
 ```
 
 If the user started by cloning the URL into the current workspace, reuse that clone rather than
@@ -42,13 +47,15 @@ Copy the `spict-*` skills into the agent's user-level skills folder so they work
 project:
 
 - Claude Code → `~/.claude/skills/`
-- Codex → `~/.codex/skills/`
-- Other agents → point their instructions at `<spict-template>/skills/`
+- Codex → `~/.agents/skills/`
+- Other agents → point their instructions at `<spict-wise>/skills/`
 
-Record the install in `~/.spict-template/config.json`:
+Record the install in `~/.spict-wise/config.json`; legacy
+`~/.spict-template/config.json` remains a scaffold fallback and uses the same
+`spict_template_path` key:
 
 ```json
-{ "spict_template_path": "<path>/spict-template", "installed_at": "<date>" }
+{ "spict_template_path": "<path>/spict-wise", "installed_at": "<date>" }
 ```
 
 `scaffold.R` reads that file to locate itself, so skipping it means passing `pack=` by hand
@@ -72,22 +79,22 @@ for (p in c("quarto", "flextable", "officer", "icesAdvice", "cowplot", "readxl",
 ```
 
 If the `spict` install fails on a missing compiler, that is a toolchain problem: run
-academic-writing's `academic-toolchain-setup` skill (Rtools on Windows, Xcode command line
+wise-writing's `academic-toolchain-setup` skill (Rtools on Windows, Xcode command line
 tools on macOS) rather than retrying the install.
 
 See `knowledge/packages.md` for the `dev` branch and why the version matters.
 
-## Step 5 — Optional: index-template
+## Step 5 — Optional: index-wise
 
 If the abundance index will come from an sdmTMB spatiotemporal model rather than an existing
-producer, install [index-template](https://github.com/DeepWaterIMR/index-template) as well. It
+producer, install [index-wise](https://github.com/DeepWaterIMR/index-wise) as well. It
 sits on BAIT and produces the index a SPiCT project consumes. A SPiCT project never builds its
 own survey index.
 
 ## Done
 
-Tell the user spict-template is installed, name the spict version, and say how to start:
+Tell the user spict-wise is installed, name the spict version, and say how to start:
 
-> *"Let's set up the `<year>` SPiCT assessment for `<stock>` using spict-template."*
+> *"Let's set up the `<year>` SPiCT assessment for `<stock>` using spict-wise."*
 
 That triggers `spict-new-assessment`.

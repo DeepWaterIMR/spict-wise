@@ -1,4 +1,4 @@
-# spict-template holds INSTRUCTIONS ONLY — never data. These rules are a safety net so that
+# spict-wise holds INSTRUCTIONS ONLY — never data. These rules are a safety net so that
 # catch series, index files, and model output can never be committed by accident. Do not
 # loosen them.
 
@@ -42,7 +42,7 @@
 **/*_files/
 
 # --- Word reference documents and Lua filters are content, not output: they come from
-#     academic-writing and are copied at scaffold time, so none is tracked here. ---
+#     wise-writing and are copied at scaffold time, so none is tracked here. ---
 
 # --- R / RStudio ---
 .Rproj.user/

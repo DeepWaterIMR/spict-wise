@@ -1,7 +1,7 @@
 # The package ecosystem
 
 A generated project declares its packages **once**, in `R/0_setup.R`, which comes from
-academic-writing. Nothing installs packages from inside a document chunk.
+wise-writing. Nothing installs packages from inside a document chunk.
 
 ## Required
 
@@ -25,7 +25,7 @@ academic-writing. Nothing installs packages from inside a document chunk.
 | `ggOceanMaps` | `MikkoVihtakari/ggOceanMaps` | Maps of the stock area |
 | `xml2`, `zip` | CRAN | Word post-processing |
 
-`spict` is declared in **academic-writing's** `optional_packages`, so a document reaches it
+`spict` is declared in **wise-writing's** `optional_packages`, so a document reaches it
 through `ensure_packages("spict")` at the point of use. Adding a package to a project means
 adding one line to `R/0_setup.R`, never an `install.packages()` call in a chunk.
 
@@ -47,16 +47,16 @@ remotes::install_github("DTUAqua/spict/spict@dev", dependencies = TRUE, upgrade 
 an assessment that cannot say which version produced it is not reproducible.
 
 If the install fails on a missing compiler, that is a toolchain problem, not a package problem —
-run academic-writing's `academic-toolchain-setup` skill (Rtools on Windows, Xcode command line
+run wise-writing's `academic-toolchain-setup` skill (Rtools on Windows, Xcode command line
 tools on macOS).
 
 ## Sibling packs
 
 | Pack | Provides |
 |---|---|
-| [academic-writing](https://github.com/DeepWaterIMR/academic-writing) | Writing style, document conventions, the project skeleton, rendering |
-| [index-template](https://github.com/DeepWaterIMR/index-template) | The sdmTMB survey index that becomes SPiCT's `obsI` |
+| [wise-writing](https://github.com/DeepWaterIMR/wise-writing) | Writing style, document conventions, the project skeleton, rendering |
+| [index-wise](https://github.com/DeepWaterIMR/index-wise) | The sdmTMB survey index that becomes SPiCT's `obsI` |
 | [BAIT](https://github.com/DeepWaterIMR/BAIT) | IMR Biotic data access, privacy, maps, life history |
 
 Call those rather than reimplementing them. In particular, do not build a survey index inside a
-SPiCT project — index-template owns that, and a SPiCT project consumes its exported output.
+SPiCT project — index-wise owns that, and a SPiCT project consumes its exported output.

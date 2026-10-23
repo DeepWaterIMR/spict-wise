@@ -7,8 +7,8 @@ read it first. This file only adds Claude-specific notes.
 
 A SPiCT stock assessment of {{STOCK_NAME}} (*{{STOCK_LATIN}}*) in ICES subareas
 {{ICES_AREAS}}, scaffolded from
-[spict-template](https://github.com/DeepWaterIMR/spict-template) on top of
-[academic-writing](https://github.com/DeepWaterIMR/academic-writing).
+[spict-wise](https://github.com/DeepWaterIMR/spict-wise) on top of
+[wise-writing](https://github.com/DeepWaterIMR/wise-writing).
 
 ## Claude-specific notes
 

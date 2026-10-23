@@ -40,7 +40,7 @@ disk, and whether the extraction in `R/2_prepare_index.R` needs rewriting.
 
 The index is almost never produced by this project. At IMR Deep-water the pattern is one
 producer repository per species or species group; for the Barents Sea redfishes that is
-[**index-template**](https://github.com/DeepWaterIMR/index-template) driving an sdmTMB
+[**index-wise**](https://github.com/DeepWaterIMR/index-wise) driving an sdmTMB
 spatiotemporal index, exported at the end of its step 4.
 
 Ask the analyst for the URL or path of whatever produces the index for this stock, then read
@@ -49,9 +49,9 @@ object, whether there are several variants to choose between, and how the file p
 arrives in `data/source/`. **Pin a commit or a tag.** An index that changed between last year's
 assessment and this one, unrecorded, is indistinguishable from a stock that changed.
 
-### When the index comes from index-template
+### When the index comes from index-wise
 
-index-template's step 4 exports the selected index. Its `get_index_split()` returns a **named
+index-wise's step 4 exports the selected index. Its `get_index_split()` returns a **named
 list of data frames**, one per variant, each with
 `model, year, est, lwr, upr, log_est, se, se_natural, type, cv`. The beaked-redfish worked
 example takes element 2, the *over 30 cm biomass* variant, because recruitment is handled

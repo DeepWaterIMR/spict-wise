@@ -21,7 +21,7 @@ format:
     fig-height: 4
     fig-dpi: 150
   docx:
-    # Two templates ship with academic-writing. Pick the body this sheet is going to:
+    # Two templates ship with wise-writing. Pick the body this sheet is going to:
     #   ../assets/advice_template_imr.docx   — Institute of Marine Research
     #   ../assets/advice_template_ices.docx  — ICES
     # Swap in the working group's own template when it has one.

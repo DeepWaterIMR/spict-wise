@@ -9,7 +9,7 @@
 | The working-group chapter, Word | `Rscript docs/render.R assessment-report docx` |
 | Everything, every configured format | `Rscript docs/render.R` |
 
-`docs/render.R` comes from academic-writing. It finds the project root, renders through Quarto,
+`docs/render.R` comes from wise-writing. It finds the project root, renders through Quarto,
 tolerates the intermediate-folder cleanup failing on a synced or network drive, and — for Word
 output — unwraps Quarto's float wrapper tables so the tables sit inline the way the ICES and
 working-group templates expect. HTML needs none of that, which is why the button is enough.

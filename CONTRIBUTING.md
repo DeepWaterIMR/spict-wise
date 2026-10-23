@@ -1,6 +1,6 @@
-# Contributing to spict-template
+# Contributing to spict-wise
 
-spict-template is a **public knowledge pack** for running SPiCT stock assessments. It contains
+spict-wise is a **public knowledge pack** for running SPiCT stock assessments. It contains
 **instructions only — never data**. Contributions are welcome; please keep the following in
 mind.
 
@@ -23,8 +23,8 @@ carry confidentiality constraints. A number that looks harmless in a worked exam
   these over duplicating guidance in a skill.**
 - **`skills/spict-*/SKILL.md`** — one skill per recurring task. Keep it short and link into
   `knowledge/` for detail. Frontmatter must carry `name` and `description`.
-- **`project-template/`** — the SPiCT layer overlaid onto academic-writing's skeleton. Only
-  files that are SPiCT-specific belong here; anything shared belongs in academic-writing.
+- **`project-template/`** — the SPiCT layer overlaid onto wise-writing's skeleton. Only
+  files that are SPiCT-specific belong here; anything shared belongs in wise-writing.
 - **`examples/`** — worked examples: a filled `config.yaml` plus notes on what to change.
 - **`memory/`** — development memory for the pack itself. Generated projects carry their own
   `ai/memory/`; do not confuse the two.
@@ -33,10 +33,10 @@ carry confidentiality constraints. A number that looks harmless in a worked exam
 
 | Change | Repository |
 |---|---|
-| `docs/render.R`, `R/0_setup.R`, `R/report_helpers.R`, `R/docx_postprocess.R`, the project layout, the `.gitignore`, Word templates, the CSL | [academic-writing](https://github.com/DeepWaterIMR/academic-writing) |
-| Writing style, document structure, AI-disclosure wording | academic-writing |
+| `docs/render.R`, `R/0_setup.R`, `R/report_helpers.R`, `R/docx_postprocess.R`, the project layout, the `.gitignore`, Word templates, the CSL | [wise-writing](https://github.com/DeepWaterIMR/wise-writing) |
+| Writing style, document structure, AI-disclosure wording | wise-writing |
 | SPiCT conventions, the model helpers, the assessment/advice documents' SPiCT content | here |
-| Survey-index construction | [index-template](https://github.com/DeepWaterIMR/index-template) |
+| Survey-index construction | [index-wise](https://github.com/DeepWaterIMR/index-wise) |
 | Biotic data access | [BAIT](https://github.com/DeepWaterIMR/BAIT) |
 
 Duplicating a shared file here to avoid a cross-repo change makes two copies that will
@@ -59,8 +59,11 @@ Before opening a pull request:
 2. **Scaffold check.** `Rscript config/validate-scaffold.R` — it scaffolds a synthetic project
    against `examples/redfish/config.yaml`, parses every R file and chunk, validates the
    document YAML, and confirms no `{{...}}` placeholder survives.
-3. Confirm every `SKILL.md` has valid frontmatter and that its `knowledge/` links resolve.
-4. If you changed a model convention in `knowledge/spict.md`, change the helper in
+3. **Config migration check.** `Rscript config/test-migration.R` — it exercises canonical and
+   legacy config precedence, stale-config fallback, both sibling clone names, and a dry
+   scaffold in a temporary home directory.
+4. Confirm every `SKILL.md` has valid frontmatter and that its `knowledge/` links resolve.
+5. If you changed a model convention in `knowledge/spict.md`, change the helper in
    `project-template/R/spict_helpers.R` in the same commit. The two are meant to agree.
 
 The validator deliberately does **not** fit a model: it checks the contract, not the science.

@@ -51,7 +51,7 @@ Run the checks the script already carries, and add the ones it cannot:
   and this one, unrecorded, is indistinguishable from a stock that changed.
 
 If the index does not exist yet and should come from an sdmTMB spatiotemporal model, that is
-[index-template](https://github.com/DeepWaterIMR/index-template)'s work. Do not build a survey
+[index-wise](https://github.com/DeepWaterIMR/index-wise)'s work. Do not build a survey
 index inside a SPiCT project.
 
 ## Step 3 — Look at what you made

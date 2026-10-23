@@ -1,19 +1,19 @@
 # scaffold.R — create a new SPiCT assessment project.
 #
 # The project base — the folder layout, R/0_setup.R, R/report_helpers.R, R/docx_postprocess.R,
-# docs/render.R, docs/assets/, and the .gitignore — comes from academic-writing's
+# docs/render.R, docs/assets/, and the .gitignore — comes from wise-writing's
 # scaffold_document(). This script calls it, then overlays the SPiCT layer on top: the model
 # helpers, the three documents' SPiCT content, the exploration workflow, and the Shiny explorer.
 #
-# There is one copy of the shared infrastructure and it lives in academic-writing. A fix to
+# There is one copy of the shared infrastructure and it lives in wise-writing. A fix to
 # docs/render.R belongs there; a fix to R/spict_helpers.R belongs here.
 #
 # Usage:
-#   source("<spict-template>/scaffold.R")
+#   source("<spict-wise>/scaffold.R")
 #   scaffold_spict("config.yaml", "../reb-spict")
 #   scaffold_spict("config.yaml", "../reb-spict", dry = TRUE)   # preview
 #
-# Requires: yaml, and academic-writing installed. (install.packages("yaml"))
+# Requires: yaml, and wise-writing installed. (install.packages("yaml"))
 
 `%||%` <- function(a, b) if (is.null(a)) b else a
 
@@ -29,7 +29,7 @@ SPICT_DOCUMENT_TYPES <- c("data-report", "assessment-report", "advice-sheet")
 }
 
 # --- Locate this pack -----------------------------------------------------------------------
-# Order: explicit argument -> ~/.spict-template/config.json (written by spict-install) ->
+# Order: explicit argument -> ~/.spict-wise/config.json (written by spict-install) ->
 # the folder this script was sourced from -> the working directory.
 .find_spict_pack <- function(pack = NULL) {
   valid <- function(p) {
@@ -38,10 +38,12 @@ SPICT_DOCUMENT_TYPES <- c("data-report", "assessment-report", "advice-sheet")
   }
   if (valid(pack)) return(normalizePath(pack))
 
-  cfg_json <- path.expand("~/.spict-template/config.json")
-  if (file.exists(cfg_json) && requireNamespace("jsonlite", quietly = TRUE)) {
-    p <- tryCatch(jsonlite::read_json(cfg_json)$spict_template_path, error = function(e) NULL)
-    if (valid(p)) return(normalizePath(p))
+  cfg_jsons <- path.expand(c("~/.spict-wise/config.json", "~/.spict-template/config.json"))
+  if (requireNamespace("jsonlite", quietly = TRUE)) {
+    for (cfg_json in cfg_jsons[file.exists(cfg_jsons)]) {
+      p <- tryCatch(jsonlite::read_json(cfg_json)$spict_template_path, error = function(e) NULL)
+      if (valid(p)) return(normalizePath(p))
+    }
   }
 
   for (frame in rev(sys.frames())) {
@@ -54,11 +56,11 @@ SPICT_DOCUMENT_TYPES <- c("data-report", "assessment-report", "advice-sheet")
 
   if (valid(getwd())) return(normalizePath(getwd()))
 
-  stop("Cannot locate the spict-template repository. Pass it explicitly via `pack=`.",
+  stop("Cannot locate the spict-wise repository. Pass it explicitly via `pack=`.",
        call. = FALSE)
 }
 
-# --- Locate academic-writing ------------------------------------------------------------------
+# --- Locate wise-writing ------------------------------------------------------------------
 # The dependency is real: without it there is no project skeleton to overlay onto.
 .find_academic_writing <- function(academic_writing = NULL, spict_pack = NULL) {
   valid <- function(p) {
@@ -67,22 +69,26 @@ SPICT_DOCUMENT_TYPES <- c("data-report", "assessment-report", "advice-sheet")
   }
   if (valid(academic_writing)) return(normalizePath(academic_writing))
 
-  cfg_json <- path.expand("~/.academic-writing/config.json")
-  if (file.exists(cfg_json) && requireNamespace("jsonlite", quietly = TRUE)) {
-    p <- tryCatch(jsonlite::read_json(cfg_json)$academic_writing_path, error = function(e) NULL)
-    if (valid(p)) return(normalizePath(p))
+  cfg_jsons <- path.expand(c("~/.wise-writing/config.json", "~/.academic-writing/config.json"))
+  if (requireNamespace("jsonlite", quietly = TRUE)) {
+    for (cfg_json in cfg_jsons[file.exists(cfg_jsons)]) {
+      p <- tryCatch(jsonlite::read_json(cfg_json)$academic_writing_path, error = function(e) NULL)
+      if (valid(p)) return(normalizePath(p))
+    }
   }
 
   # Packs are conventionally cloned side by side.
   if (!is.null(spict_pack)) {
-    sibling <- file.path(dirname(spict_pack), "academic-writing")
-    if (valid(sibling)) return(normalizePath(sibling))
+    for (sibling_name in c("wise-writing", "academic-writing")) {
+      sibling <- file.path(dirname(spict_pack), sibling_name)
+      if (valid(sibling)) return(normalizePath(sibling))
+    }
   }
 
   stop(
-    "Cannot locate academic-writing, which spict-template builds on.\n",
+    "Cannot locate wise-writing, which spict-wise builds on.\n",
     "Install it with the `academic-writing-install` skill, or from\n",
-    "https://github.com/DeepWaterIMR/academic-writing, then try again.\n",
+    "https://github.com/DeepWaterIMR/wise-writing, then try again.\n",
     "If it is already cloned, pass its path via `academic_writing=`.",
     call. = FALSE
   )
@@ -138,8 +144,8 @@ SPICT_DOCUMENT_TYPES <- c("data-report", "assessment-report", "advice-sheet")
 #' @param target Directory to create. Must not exist, or must be empty.
 #' @param types Document types to scaffold. Defaults to the three a SPiCT assessment needs;
 #'   add `"benchmark-report"` in a benchmark year.
-#' @param pack Path to the spict-template repository. Located automatically when omitted.
-#' @param academic_writing Path to the academic-writing repository. Located automatically when
+#' @param pack Path to the spict-wise repository. Located automatically when omitted.
+#' @param academic_writing Path to the wise-writing repository. Located automatically when
 #'   omitted.
 #' @param dry Preview without writing anything.
 #' @return The target path, invisibly.
@@ -164,13 +170,13 @@ scaffold_spict <- function(config,
   cfg <- .read_yaml_utf8(config)
   .validate_spict_config(cfg)
 
-  # --- Lay down the academic-writing base ---------------------------------------------------
+  # --- Lay down the wise-writing base ---------------------------------------------------
   # scaffold_document() validates PROJECT_TITLE, PROJECT_SLUG, AUTHORS, AFFILIATIONS, copies
   # its own project-template, keeps only the requested document types, copies each type's Word
   # templates and CSL into docs/assets/, and stamps its own tokens.
   source(file.path(aw, "scaffold.R"), local = FALSE)
   scaffold_document(config = config, target = target, types = types, pack = aw, dry = dry)
-  msg("Laid down the academic-writing base from ", aw)
+  msg("Laid down the wise-writing base from ", aw)
 
   if (dry) {
     msg("Would overlay the SPiCT layer from ", overlay)
@@ -184,7 +190,7 @@ scaffold_spict <- function(config,
   )
   msg("Overlaid the SPiCT layer")
 
-  # academic-writing's generic data-report skeleton is replaced by the SPiCT assessment and the
+  # wise-writing's generic data-report skeleton is replaced by the SPiCT assessment and the
   # exploration documents, which live one level deeper, and its generic data script by the
   # catch and index pipelines. Leaving either behind gives the project two answers to the same
   # question.
@@ -193,7 +199,7 @@ scaffold_spict <- function(config,
   unlink(file.path(target, "website"), recursive = TRUE)
 
   # --- Merge the bibliographies ------------------------------------------------------------------
-  # academic-writing ships R, Quarto, knitr, ggplot2, and tidyverse; spict-template adds the
+  # wise-writing ships R, Quarto, knitr, ggplot2, and tidyverse; spict-wise adds the
   # SPiCT and ICES references its documents cite. Appending keeps both.
   bib_main  <- file.path(target, "docs", "assets", "references.bib")
   bib_spict <- file.path(target, "docs", "assets", "spict-references.bib")
@@ -217,16 +223,16 @@ scaffold_spict <- function(config,
   msg("Renamed SLUG-* files to ", slug, "-*")
 
   # --- Stamp the tokens -------------------------------------------------------------------------
-  # The overlay's files have not been through academic-writing's stamping, so both token sets
+  # The overlay's files have not been through wise-writing's stamping, so both token sets
   # are applied here. `.author_block()` and `.affiliation_block()` come from the sourced
-  # academic-writing scaffold, so the two packs cannot disagree about the YAML they emit.
+  # wise-writing scaffold, so the two packs cannot disagree about the YAML they emit.
   sentence_case <- function(x) {
     x <- as.character(x)
     paste0(toupper(substring(x, 1, 1)), substring(x, 2))
   }
 
   tokens <- c(
-    # academic-writing's set, for the overlay files
+    # wise-writing's set, for the overlay files
     "{{PROJECT_TITLE}}"      = as.character(cfg$PROJECT_TITLE),
     "{{PROJECT_SLUG}}"       = as.character(cfg$PROJECT_SLUG),
     "{{PROJECT_YEAR}}"       = as.character(cfg$PROJECT_YEAR %||% cfg$ASSESSMENT_YEAR),
@@ -236,7 +242,7 @@ scaffold_spict <- function(config,
     "{{FIG_WIDTH_DOUBLE}}"   = format(round((cfg$FIG_WIDTH_DOUBLE_MM %||% 170) / 25.4, 2)),
     "{{FIG_WIDTH_SINGLE}}"   = format(round((cfg$FIG_WIDTH_SINGLE_MM %||% 85) / 25.4, 2)),
     "{{TODAY}}"              = format(Sys.Date(), "%Y-%m-%d"),
-    # spict-template's set
+    # spict-wise's set
     "{{STOCK_CODE}}"         = as.character(cfg$STOCK_CODE),
     "{{STOCK_NAME}}"         = as.character(cfg$STOCK_NAME),
     "{{STOCK_NAME_SENTENCE}}" = sentence_case(cfg$STOCK_NAME),

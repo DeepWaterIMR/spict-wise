@@ -1,6 +1,6 @@
 # validate-scaffold.R — structural checks on a synthetic scaffold.
 #
-# Run from the spict-template repository root:
+# Run from the spict-wise repository root:
 #
 #   Rscript config/validate-scaffold.R
 #
@@ -9,7 +9,7 @@
 # and confirms no placeholder survived. It deliberately does NOT fit a model or touch real
 # data: this checks the contract, not the science.
 #
-# academic-writing must be installed, or its path passed as SPICT_ACADEMIC_WRITING.
+# wise-writing must be installed, or its path passed as SPICT_ACADEMIC_WRITING.
 
 source("scaffold.R")
 
@@ -52,7 +52,7 @@ stopifnot(all(dir.exists(file.path(target, c(
   "docs/assessment-report", "docs/advice-sheet", "figures", "logs", "shiny/spict-explorer"
 )))))
 
-# The generic academic-writing skeletons must be gone: two answers to the same question is
+# The generic wise-writing skeletons must be gone: two answers to the same question is
 # worse than one wrong answer.
 stopifnot(!any(file.exists(file.path(target, c(
   "docs/data-report/data-report.qmd", "R/1_data.R", "memory"

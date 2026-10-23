@@ -1,6 +1,6 @@
 ---
 name: spict-new-assessment
-description: Start a new SPiCT stock assessment project — run the structured questionnaire, confirm a plan, then scaffold a project folder from project-template with config.yaml. Use when the user says "set up a SPiCT assessment for <stock>", "scaffold a spict-template project", or asks to start a biomass-dynamic assessment.
+description: Start a new SPiCT stock assessment project — run the structured questionnaire, confirm a plan, then scaffold a project folder from project-template with config.yaml. Use when the user says "set up a SPiCT assessment for <stock>", "scaffold a spict-wise project", or asks to start a biomass-dynamic assessment.
 ---
 
 # Start a new SPiCT assessment
@@ -10,8 +10,8 @@ the workflow. **Ask the questionnaire, plan, then scaffold — do not start writ
 yet.**
 
 Read `knowledge/workflow.md` and `knowledge/project-structure.md` first, then
-`knowledge/academic-writing.md` and the installed `academic-style`, `academic-conventions`, and
-`academic-data-report` skills. spict-template supplies the assessment method; academic-writing
+`knowledge/wise-writing.md` and the installed `academic-style`, `academic-conventions`, and
+`academic-data-report` skills. spict-wise supplies the assessment method; wise-writing
 supplies the structure, style, and publishing conventions for every file that comes out.
 
 ## Step 1 — The questionnaire
@@ -52,7 +52,7 @@ gives — read the producer's documentation rather than inferring its column nam
 What kind of index, from which producer, which variant, and what fraction of the year the
 observation refers to. See `knowledge/indices.md`. If the index does not exist yet and should
 come from an sdmTMB spatiotemporal model, that is
-[index-template](https://github.com/DeepWaterIMR/index-template)'s job, not this project's —
+[index-wise](https://github.com/DeepWaterIMR/index-wise)'s job, not this project's —
 say so and settle the SPiCT project's other questions in the meantime.
 
 ### Model settings
@@ -67,7 +67,7 @@ say so and settle the SPiCT project's other questions in the meantime.
 
 ### Human metadata
 
-Accountable authors and affiliations, using academic-writing's `AUTHORS` and `AFFILIATIONS`
+Accountable authors and affiliations, using wise-writing's `AUTHORS` and `AFFILIATIONS`
 schema. **Never invent these.** Confirm the exact AI models and roles before anything is
 disclosed in a document.
 
@@ -96,7 +96,7 @@ analyst could not answer.
    scaffold_spict(config = "config.yaml", target = "<target-dir>")   # dry = TRUE to preview
    ```
 
-   This calls academic-writing's `scaffold_document()` for the project base, overlays the SPiCT
+   This calls wise-writing's `scaffold_document()` for the project base, overlays the SPiCT
    layer, merges the bibliographies, and stamps every `{{PLACEHOLDER}}`. Confirm none remains.
 
    In a benchmark year, add the benchmark chapter:

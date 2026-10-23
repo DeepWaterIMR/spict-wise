@@ -2,8 +2,8 @@
 #
 # ─────────────────────────────────────────────────────────────────────────────────────────
 # The index is not produced here. It comes from a separate producer — for the Barents Sea
-# redfishes, an sdmTMB spatiotemporal index built with index-template
-# (https://github.com/DeepWaterIMR/index-template) — and this script adapts whatever shape
+# redfishes, an sdmTMB spatiotemporal index built with index-wise
+# (https://github.com/DeepWaterIMR/index-wise) — and this script adapts whatever shape
 # that producer emits to the one contract everything downstream relies on:
 #
 #   data/output/<STOCK_SLUG>_index.rds    year, est, se   (lwr and upr optional, for plots)

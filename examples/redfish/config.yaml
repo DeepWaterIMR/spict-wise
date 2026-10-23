@@ -9,7 +9,7 @@
 # EXAMPLE, not a default: the priors in particular are golden-redfish values that beaked
 # redfish inherited and has not yet replaced.
 
-# --- academic-writing identity ---------------------------------------------------------
+# --- wise-writing identity ---------------------------------------------------------
 PROJECT_TITLE: "SPiCT assessment of beaked redfish (Sebastes mentella) in ICES subareas 1 and 2"
 PROJECT_SLUG: "reb-spict"
 PROJECT_YEAR: 2026
@@ -63,7 +63,7 @@ FIRST_DATA_YEAR: 1987
 INDEX_NAME: "Over 30 cm biomass index"  # The variant used for the assessment
 INDEX_ELEMENT: "Over 30 cm biomass"     # Name (preferred) or position in the producer's list
 INDEX_TIMING: 0.5                       # Fraction of the year the observation refers to
-INDEX_SOURCE: "https://github.com/DeepWaterIMR/index-template"
+INDEX_SOURCE: "https://github.com/DeepWaterIMR/index-wise"
 
 # --- Model settings ---------------------------------------------------------------------
 PRODUCTION_MODEL: "schaefer"            # Fixes logn at log(2); anything else is a benchmark decision

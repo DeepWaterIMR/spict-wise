@@ -28,7 +28,7 @@ here rather than loading the fit.
 
 ## The advice sheet
 
-Structure, tables, and the writing rules are owned by academic-writing's
+Structure, tables, and the writing rules are owned by wise-writing's
 **`academic-advice-sheet`** skill. Read it. What is specific to SPiCT:
 
 - **The advice comes from the `manTable` row matching the advice rule**, not from row 1. Look
@@ -67,7 +67,7 @@ obvious blank.
 
 ## The working-group chapter
 
-Owned by academic-writing's **`academic-assessment-report`** skill. Two things it needs from
+Owned by wise-writing's **`academic-assessment-report`** skill. Two things it needs from
 here:
 
 - **The float numbers are the group's**, assigned in the report as a whole. Write the assigned

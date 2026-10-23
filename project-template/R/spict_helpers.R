@@ -1,6 +1,6 @@
 # spict_helpers.R — building, fitting, and summarising the SPiCT model.
 #
-# The conventions encoded here are spict-template's, and are documented in the pack's
+# The conventions encoded here are spict-wise's, and are documented in the pack's
 # knowledge/spict.md. Departing from one is a decision to record in ai/memory/, not a
 # preference: catches in tonnes, the index scaled by its own mean, stdevfac vectors that
 # average to 1, logn fixed at the Schaefer value, and logalpha/logbeta priors deactivated.

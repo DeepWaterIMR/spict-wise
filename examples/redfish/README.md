@@ -24,7 +24,7 @@ values, and hand it to `scaffold_spict()`.
   spreadsheet (`s mentella` tab) before that, Russian catches from the spreadsheet throughout,
   and a reconstructed historical series before 1993.
 - **Index** — the *over 30 cm biomass* variant of an sdmTMB spatiotemporal survey index built
-  with [index-template](https://github.com/DeepWaterIMR/index-template) from all available
+  with [index-wise](https://github.com/DeepWaterIMR/index-wise) from all available
   bottom-trawl data. Recruitment is handled separately by gadget3, which is why the index
   starts at 30 cm.
 

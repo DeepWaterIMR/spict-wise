@@ -1,6 +1,6 @@
 # shiny/
 
-Interactive applications. This is spict-template's one addition to the academic-writing project
+Interactive applications. This is spict-wise's one addition to the wise-writing project
 layout; everything else follows it unchanged.
 
 `spict-explorer/` fits SPiCT to the project's compiled series under settings the user changes

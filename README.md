@@ -1,44 +1,46 @@
-<!-- badges / logo go here once available -->
+[![Part of Fiskwise](https://deepwaterimr.github.io/fiskwise/assets/part-of-fiskwise.svg)](https://deepwaterimr.github.io/fiskwise/)
 
-# 🐟 spict-template — Run SPiCT stock assessments with AI agents
+# 🐟 spict-wise — Run SPiCT stock assessments with AI agents
 
 <!-- version -->
 **Version 0.2.0** (2026-09-09)
 <!-- /version -->
 
+This repository is part of [Fiskwise](https://github.com/DeepWaterIMR/fiskwise), with its [project hub](https://deepwaterimr.github.io/fiskwise/). See [MIGRATION.md](MIGRATION.md) for repository and local config migration notes.
+
 **Teach your AI coding agent to run a biomass-dynamic stock assessment — from catch series to catch advice — for any stock, on your own machine.**
 
-spict-template is a knowledge pack that turns a general coding agent (Claude Code, Codex, Cursor, Gemini CLI, Mistral, …) into a competent assistant for [**SPiCT**](https://github.com/DTUAqua/spict) assessments — the Surplus Production model in Continuous Time of [Pedersen & Berg (2017)](https://doi.org/10.1111/faf.12174). It is distilled from the `reg-spict` (golden redfish) and `reb-spict` (beaked redfish) assessments of the Deep-water species and cartilaginous fish group at the Institute of Marine Research.
+spict-wise is a knowledge pack that turns a general coding agent (Claude Code, Codex, Cursor, Gemini CLI, Mistral, …) into a competent assistant for [**SPiCT**](https://github.com/DTUAqua/spict) assessments — the Surplus Production model in Continuous Time of [Pedersen & Berg (2017)](https://doi.org/10.1111/faf.12174). It is distilled from the `reg-spict` (golden redfish) and `reb-spict` (beaked redfish) assessments of the Deep-water species and cartilaginous fish group at the Institute of Marine Research.
 
 Tell your agent which stock you want assessed, and it will:
 
 1. **Ask you a structured questionnaire** and confirm a plan.
-2. **Scaffold a project folder** with academic-writing's standard layout (`docs/`, `R/`, `data/`, `figures/`, `ai/`, `logs/`, `config/`).
+2. **Scaffold a project folder** with wise-writing's standard layout (`docs/`, `R/`, `data/`, `figures/`, `ai/`, `logs/`, `config/`).
 3. **Compile the data** — the catch series and the abundance index — and record where every number came from.
 4. **Fit, diagnose, and report** the model, then produce the **working-group chapter** and the **advice sheet**.
 
 > **It is not a trained model.** Your data never leaves your machine and never enters any model's weights. The agent simply *reads this repo* while it helps you. See [Confidentiality](#-confidentiality).
 
-## ✍️ Built on academic-writing
+## ✍️ Built on wise-writing
 
-spict-template sits **on top of** [academic-writing](https://github.com/DeepWaterIMR/academic-writing). That pack owns the project layout, the scientific writing style, the document conventions, and the rendering pipeline; spict-template adds the **SPiCT assessment** layer. The dependency is real rather than decorative — this pack's `scaffold.R` calls academic-writing's `scaffold_document()` and overlays the SPiCT content on what it produces, so there is exactly one copy of the shared infrastructure. Install it first:
+spict-wise sits **on top of** [wise-writing](https://github.com/DeepWaterIMR/wise-writing). That pack owns the project layout, the scientific writing style, the document conventions, and the rendering pipeline; spict-wise adds the **SPiCT assessment** layer. The dependency is real rather than decorative — this pack's `scaffold.R` calls wise-writing's `scaffold_document()` and overlays the SPiCT content on what it produces, so there is exactly one copy of the shared infrastructure. Install it first:
 
 ```
-install https://github.com/DeepWaterIMR/academic-writing
+install https://github.com/DeepWaterIMR/wise-writing
 ```
 
 ## 🚀 Quickstart
 
-1. **Install academic-writing** (if you haven't): `install https://github.com/DeepWaterIMR/academic-writing`.
-2. **Install spict-template:**
+1. **Install wise-writing** (if you haven't): `install https://github.com/DeepWaterIMR/wise-writing`.
+2. **Install spict-wise:**
    ```
-   install https://github.com/DeepWaterIMR/spict-template
+   install https://github.com/DeepWaterIMR/spict-wise
    ```
-   The agent runs [`spict-install`](skills/spict-install/SKILL.md): check academic-writing → clone spict-template → install the skills globally → verify `spict` compiles.
+   The agent runs [`spict-install`](skills/spict-install/SKILL.md): check wise-writing → clone spict-wise → install the skills globally → verify `spict` compiles.
 3. **Start an assessment:**
    ```
    Let's set up the 2026 SPiCT assessment for beaked redfish in ICES subareas 1 and 2,
-   using spict-template.
+   using spict-wise.
    ```
    The agent runs the questionnaire, plans, scaffolds a project, and drives the workflow.
 
@@ -63,8 +65,8 @@ Long renders go through [`spict-render`](skills/spict-render/SKILL.md) — code 
 
 - [`AGENTS.md`](AGENTS.md) / [`CLAUDE.md`](CLAUDE.md) — the agent contract.
 - [`skills/`](skills/) — the nine `spict-*` skills, installed globally.
-- [`knowledge/`](knowledge/) — the shared source of truth: [the model conventions](knowledge/spict.md), [catch data](knowledge/catch-data.md), [indices](knowledge/indices.md), [diagnostics](knowledge/diagnostics.md), [advice](knowledge/advice.md), [the hard constraints](knowledge/constraints.md), [project structure](knowledge/project-structure.md), [the academic-writing contract](knowledge/academic-writing.md), [packages](knowledge/packages.md), and [rendering](knowledge/rendering.md).
-- [`project-template/`](project-template/) — the SPiCT layer overlaid onto academic-writing's skeleton.
+- [`knowledge/`](knowledge/) — the shared source of truth: [the model conventions](knowledge/spict.md), [catch data](knowledge/catch-data.md), [indices](knowledge/indices.md), [diagnostics](knowledge/diagnostics.md), [advice](knowledge/advice.md), [the hard constraints](knowledge/constraints.md), [project structure](knowledge/project-structure.md), [the wise-writing contract](knowledge/wise-writing.md), [packages](knowledge/packages.md), and [rendering](knowledge/rendering.md).
+- [`project-template/`](project-template/) — the SPiCT layer overlaid onto wise-writing's skeleton.
 - [`scaffold.R`](scaffold.R) — `scaffold_spict()`, which stamps a project from `config.yaml`.
 - [`examples/redfish/`](examples/redfish/) — a worked example.
 - [`config/validate-scaffold.R`](config/validate-scaffold.R) — the structural check.
@@ -91,10 +93,10 @@ This repo is **public and contains instructions only — never data**:
 
 ## 🧰 Siblings
 
-- [**academic-writing**](https://github.com/DeepWaterIMR/academic-writing) — scientific writing style, document conventions, the project skeleton. **Required.**
-- [**index-template**](https://github.com/DeepWaterIMR/index-template) — sdmTMB spatiotemporal survey indices. Produces the index a SPiCT assessment consumes.
+- [**wise-writing**](https://github.com/DeepWaterIMR/wise-writing) — scientific writing style, document conventions, the project skeleton. **Required.**
+- [**index-wise**](https://github.com/DeepWaterIMR/index-wise) — sdmTMB spatiotemporal survey indices. Produces the index a SPiCT assessment consumes.
 - [**BAIT**](https://github.com/DeepWaterIMR/BAIT) — IMR Biotic data access, privacy, maps, life history.
-- [**presentation-template**](https://github.com/DeepWaterIMR/presentation-template) — Quarto RevealJS slides.
+- [**wise-presentations**](https://github.com/DeepWaterIMR/wise-presentations) — Quarto RevealJS slides.
 
 Install whichever you need alongside; the skills stay out of each other's way.
 
@@ -114,4 +116,4 @@ See [`CONTRIBUTING.md`](CONTRIBUTING.md). Run `Rscript config/validate-scaffold.
 
 ## 📄 Licence
 
-GPL-3, matching `spict` itself. See [`LICENSE`](LICENSE). The Word reference documents and the citation style come from academic-writing at scaffold time and keep their own terms.
+GPL-3, matching `spict` itself. See [`LICENSE`](LICENSE). The Word reference documents and the citation style come from wise-writing at scaffold time and keep their own terms.

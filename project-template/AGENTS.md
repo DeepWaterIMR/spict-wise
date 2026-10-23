@@ -9,8 +9,8 @@ authors and are accountable for every word and every number; you are a supervise
 > agents**. Claude Code reads [`CLAUDE.md`](CLAUDE.md).
 
 This project was scaffolded from
-[spict-template](https://github.com/DeepWaterIMR/spict-template), which sits on top of
-[academic-writing](https://github.com/DeepWaterIMR/academic-writing). The rules live in their
+[spict-wise](https://github.com/DeepWaterIMR/spict-wise), which sits on top of
+[wise-writing](https://github.com/DeepWaterIMR/wise-writing). The rules live in their
 skills; read them rather than guessing:
 
 | Skill | Read it before |

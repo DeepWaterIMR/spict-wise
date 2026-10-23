@@ -1,4 +1,4 @@
-# AGENTS.md — spict-template
+# AGENTS.md — spict-wise
 
 You are helping a scientist at the **Institute of Marine Research** (IMR /
 Havforskningsinstituttet, Norway) run a **SPiCT** stock assessment — the Surplus Production
@@ -13,18 +13,18 @@ working-group chapter and a catch advice sheet. You write **R** with **tidyverse
 
 ---
 
-## What spict-template is
+## What spict-wise is
 
 A **vendor-neutral knowledge pack** — not a trained model, and not a repository you fill in
 place. It teaches an agent to run a SPiCT assessment for a chosen stock, and it **generates a
 new project folder** for that stock. You learn the method by *reading this repo at runtime*.
 
-spict-template sits **on top of**
-[academic-writing](https://github.com/DeepWaterIMR/academic-writing), which owns the project
+spict-wise sits **on top of**
+[wise-writing](https://github.com/DeepWaterIMR/wise-writing), which owns the project
 layout, the writing style, the document conventions, and the rendering pipeline. The dependency
-is real: `scaffold.R` here calls academic-writing's `scaffold_document()` and overlays the SPiCT
-layer on what it produces. If academic-writing is not installed, install it first
-(`install https://github.com/DeepWaterIMR/academic-writing`).
+is real: `scaffold.R` here calls wise-writing's `scaffold_document()` and overlays the SPiCT
+layer on what it produces. If wise-writing is not installed, install it first
+(`install https://github.com/DeepWaterIMR/wise-writing`).
 
 ---
 
@@ -33,7 +33,7 @@ layer on what it produces. If academic-writing is not installed, install it firs
 Catch data can be commercially sensitive, and Norwegian sales-note data carry confidentiality
 constraints. **This repo is public and must contain no data and no private information.**
 
-1. **Never commit data or private paths into spict-template.** No catch series, no index files,
+1. **Never commit data or private paths into spict-wise.** No catch series, no index files,
    no local absolute paths (`/Users/...`, `OneDrive`, `CloudStorage`). Templates use
    **placeholders and code**, never data.
 2. Real data lives only in the **generated project folder**, and even there `data/`, `logs/`,
@@ -49,14 +49,14 @@ If a request would breach any of the above, stop and explain rather than comply.
 
 ## Working across projects
 
-spict-template is installed **once per machine** and used to spin up **many** stock projects —
+spict-wise is installed **once per machine** and used to spin up **many** stock projects —
 not cloned into each one. When set up via `spict-install`, its location is saved to
-`~/.spict-template/config.json` and its skills are copied into the agent's user-level skills
-folder (`~/.claude/skills/` for Claude Code, `~/.codex/skills/` for Codex).
+`~/.spict-wise/config.json` and its skills are copied into the agent's user-level skills
+folder (`~/.claude/skills/` for Claude Code, `~/.agents/skills/` for Codex).
 
 - **Trigger:** the user asks to *"set up the `<year>` SPiCT assessment for `<stock>`"*, or to
   fit, explore, or report a SPiCT assessment.
-- **If spict-template isn't installed yet**, run `skills/spict-install/SKILL.md` first.
+- **If spict-wise isn't installed yet**, run `skills/spict-install/SKILL.md` first.
 - **Never install at a filesystem root or a system directory.** Refuse and suggest a safe
   user-space location.
 
@@ -66,7 +66,7 @@ folder (`~/.claude/skills/` for Claude Code, `~/.codex/skills/` for Codex).
 
 | If the user wants to… | Read |
 |---|---|
-| Install / set up spict-template | `skills/spict-install/SKILL.md` |
+| Install / set up spict-wise | `skills/spict-install/SKILL.md` |
 | Update it (git pull + re-sync skills) | `skills/spict-update/SKILL.md` |
 | **Start** a new assessment (questionnaire → scaffold) | `skills/spict-new-assessment/SKILL.md` |
 | **Step 1** — compile the catches and the index | `skills/spict-compile-data/SKILL.md` |
@@ -88,7 +88,7 @@ Shared knowledge lives in `knowledge/`:
 - `advice.md` — from a fit to the chapter and the advice sheet.
 - `constraints.md` — **the three hard rules.** Read before editing any document.
 - `project-structure.md` — the generated project's layout and `config.yaml` fields.
-- `academic-writing.md` — the shared contract with academic-writing.
+- `wise-writing.md` — the shared contract with wise-writing.
 - `packages.md` — the package ecosystem and how to install `spict`.
 - `rendering.md` — rendering, caching toggles, long renders, common failures.
 
@@ -149,7 +149,7 @@ two.
 
 For every generated project artifact, read the installed `academic-style`,
 `academic-conventions`, `academic-data-report`, `academic-assessment-report`, and
-`academic-advice-sheet` skills. spict-template supplies the assessment method; academic-writing
+`academic-advice-sheet` skills. spict-wise supplies the assessment method; wise-writing
 supplies structure, style, and publishing conventions. Follow
-[`knowledge/academic-writing.md`](knowledge/academic-writing.md). Do not vendor copies of those
+[`knowledge/wise-writing.md`](knowledge/wise-writing.md). Do not vendor copies of those
 skills here — read the installed versions so improvements propagate.

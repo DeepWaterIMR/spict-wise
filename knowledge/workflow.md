@@ -53,6 +53,6 @@ working group has adopted SPiCT as the assessment model for the stock.
 The workflow is distilled from the `reg-spict` (golden redfish) and `reb-spict` (beaked
 redfish) projects of the Deep-water species and cartilaginous fish group at the Institute of
 Marine Research, and from the SPiCT guidelines of Mildenberger et al. (2021,
-<https://github.com/DTUAqua/spict>). The generated project's documents are spict-template's own
+<https://github.com/DTUAqua/spict>). The generated project's documents are spict-wise's own
 evolving implementation of that routine — improve them here, in the pack, whenever a lesson
 generalises beyond one stock.
