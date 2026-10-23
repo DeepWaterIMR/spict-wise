@@ -82,6 +82,12 @@ stopifnot(
 for (path in list.files(file.path(target, "R"), "\\.R$", full.names = TRUE)) parse(path)
 invisible(parse(file.path(target, "docs/render.R")))
 invisible(parse(file.path(target, "shiny/spict-explorer/app.R")))
+app_setup <- readLines(file.path(target, "shiny/spict-explorer/app.R"), warn = FALSE)
+stopifnot(any(grepl('source(file.path(PROJECT_ROOT, "R", "package_setup.R"))',
+                    app_setup, fixed = TRUE)),
+          any(grepl('R_SPICT_INSTALL_MISSING', app_setup, fixed = TRUE)),
+          any(grepl('unset = "false"', app_setup, fixed = TRUE)),
+          !any(grepl("install.packages(", app_setup, fixed = TRUE)))
 
 # --- Documents ----------------------------------------------------------------------------
 qmds <- list.files(file.path(target, "docs"), "\\.qmd$", recursive = TRUE, full.names = TRUE)

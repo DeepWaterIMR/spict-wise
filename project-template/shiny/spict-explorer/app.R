@@ -8,35 +8,6 @@
 ## what a re-render would produce. It does not write anything back: when a configuration is
 ## worth keeping, put it in config.yaml or in R/explore_fit.R.
 
-cran_pkgs <- c(
-  "shiny", "bslib", "shinycssloaders", "dplyr", "tidyr",
-  "readr", "ggplot2", "zoo", "DT", "tibble", "cowplot", "yaml", "here"
-)
-missing_cran <- cran_pkgs[!vapply(cran_pkgs, requireNamespace, logical(1), quietly = TRUE)]
-if (length(missing_cran) > 0) {
-  message("Installing missing CRAN packages: ", paste(missing_cran, collapse = ", "))
-  install.packages(missing_cran, quiet = TRUE)
-}
-
-if (!requireNamespace("spict", quietly = TRUE)) {
-  message("Installing spict from GitHub (DTUAqua/spict)…")
-  if (!requireNamespace("remotes", quietly = TRUE)) install.packages("remotes", quiet = TRUE)
-  remotes::install_github("DTUAqua/spict/spict", quiet = TRUE)
-}
-
-suppressPackageStartupMessages({
-  library(shiny)
-  library(bslib)
-  library(shinycssloaders)
-  library(spict)
-  library(dplyr)
-  library(tidyr)
-  library(readr)
-  library(ggplot2)
-  library(zoo)
-  library(DT)
-})
-
 `%||%` <- function(a, b) if (is.null(a)) b else a
 
 # ── Locate the project root ────────────────────────────────────────────────────────────────
@@ -58,6 +29,48 @@ locate_project_root <- function() {
 
 PROJECT_ROOT <- locate_project_root()
 setwd(PROJECT_ROOT)
+
+# Use the shared consent-aware helper copied into every generated project by wise-writing.
+# The package list includes the project's core dependencies because R/0_setup.R is sourced
+# below. Installation stays off unless the analyst opts in for this run; the helper also
+# respects renv and R_AW_INSTALL_MISSING=false.
+source(file.path(PROJECT_ROOT, "R", "package_setup.R"))
+app_packages <- c(
+  tidyverse = NA,
+  sf = NA,
+  scales = NA,
+  cowplot = NA,
+  ggspatial = NA,
+  ggnewscale = NA,
+  flextable = NA,
+  kableExtra = NA,
+  readxl = NA,
+  yaml = NA,
+  zip = NA,
+  quarto = NA,
+  ggOceanMaps = "MikkoVihtakari/ggOceanMaps",
+  shiny = NA,
+  bslib = NA,
+  shinycssloaders = NA,
+  dplyr = NA,
+  tidyr = NA,
+  readr = NA,
+  ggplot2 = NA,
+  zoo = NA,
+  DT = NA,
+  tibble = NA,
+  here = NA,
+  spict = "DTUAqua/spict/spict"
+)
+install_missing_app_packages <- identical(
+  tolower(trimws(Sys.getenv("R_SPICT_INSTALL_MISSING", unset = "false"))), "true"
+)
+package_setup(
+  app_packages,
+  install_missing_packages = install_missing_app_packages,
+  project_root = PROJECT_ROOT
+)
+
 source(file.path(PROJECT_ROOT, "R", "0_setup.R"))
 source(file.path(PROJECT_ROOT, "R", "spict_helpers.R"))
 source(file.path(PROJECT_ROOT, "R", "advice_tables.R"))

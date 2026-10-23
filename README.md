@@ -23,7 +23,11 @@ Tell your agent which stock you want assessed, and it will:
 
 ## ✍️ Built on wise-writing
 
-spict-wise sits **on top of** [wise-writing](https://github.com/DeepWaterIMR/wise-writing). That pack owns the project layout, the scientific writing style, the document conventions, and the rendering pipeline; spict-wise adds the **SPiCT assessment** layer. The dependency is real rather than decorative — this pack's `scaffold.R` calls wise-writing's `scaffold_document()` and overlays the SPiCT content on what it produces, so there is exactly one copy of the shared infrastructure. Install it first:
+spict-wise owns the **SPiCT assessment** layer. [wise-writing](https://github.com/DeepWaterIMR/wise-writing) owns the shared project layout, scientific writing style, document conventions, and rendering pipeline. The dependency is real: `scaffold.R` calls wise-writing's `scaffold_document()` and overlays the SPiCT content, so there is exactly one copy of shared infrastructure. Install wise-writing on demand before scaffolding; installing spict-wise alone does not require it.
+
+Use `fiskwise-workflow` for requests spanning packs and `fiskwise-install`, `fiskwise-update`,
+and `fiskwise-uninstall` for managed lifecycle. Standalone spict-wise skills remain available.
+For managed R tasks, always use **`r-code-style`**.
 
 ```
 install https://github.com/DeepWaterIMR/wise-writing
@@ -31,12 +35,12 @@ install https://github.com/DeepWaterIMR/wise-writing
 
 ## 🚀 Quickstart
 
-1. **Install wise-writing** (if you haven't): `install https://github.com/DeepWaterIMR/wise-writing`.
-2. **Install spict-wise:**
+1. **Install spict-wise:**
    ```
    install https://github.com/DeepWaterIMR/spict-wise
    ```
-   The agent runs [`spict-install`](skills/spict-install/SKILL.md): check wise-writing → clone spict-wise → install the skills globally → verify `spict` compiles.
+   The agent runs [`spict-install`](skills/spict-install/SKILL.md): clone spict-wise → install its skills globally → check the SPiCT toolchain.
+2. **Before scaffolding**, ensure wise-writing is installed; the agent will request it if needed.
 3. **Start an assessment:**
    ```
    Let's set up the 2026 SPiCT assessment for beaked redfish in ICES subareas 1 and 2,
@@ -93,7 +97,7 @@ This repo is **public and contains instructions only — never data**:
 
 ## 🧰 Siblings
 
-- [**wise-writing**](https://github.com/DeepWaterIMR/wise-writing) — scientific writing style, document conventions, the project skeleton. **Required.**
+- [**wise-writing**](https://github.com/DeepWaterIMR/wise-writing) — scientific writing style, document conventions, and the shared project skeleton. **Required before scaffolding**; install it on demand.
 - [**index-wise**](https://github.com/DeepWaterIMR/index-wise) — sdmTMB spatiotemporal survey indices. Produces the index a SPiCT assessment consumes.
 - [**BAIT**](https://github.com/DeepWaterIMR/BAIT) — IMR Biotic data access, privacy, maps, life history.
 - [**wise-presentations**](https://github.com/DeepWaterIMR/wise-presentations) — Quarto RevealJS slides.

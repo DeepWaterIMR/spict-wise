@@ -27,8 +27,17 @@ spict-wise sits **on top of**
 [wise-writing](https://github.com/DeepWaterIMR/wise-writing), which owns the project
 layout, the writing style, the document conventions, and the rendering pipeline. The dependency
 is real: `scaffold.R` here calls wise-writing's `scaffold_document()` and overlays the SPiCT
-layer on what it produces. If wise-writing is not installed, install it first
-(`install https://github.com/DeepWaterIMR/wise-writing`).
+layer on what it produces. If wise-writing is not installed, install it on demand before
+scaffolding (`install https://github.com/DeepWaterIMR/wise-writing`).
+
+spict-wise owns SPiCT-specific methods, helpers, and document content. wise-writing owns shared
+scientific style, package-loading, project layout, and generic reporting. Use the installed
+**`r-code-style`** skill for every managed R task. Keep spict-wise usable on its own and do not
+require Fiskwise. In managed mode, follow `fiskwise-install`, `fiskwise-update`, or
+`fiskwise-uninstall`; honor saved R-install consent, disabled toggles, and `renv.lock`, and do
+not repeat dependency updates. Install SPiCT/TMB dependencies only when needed and permitted;
+do not install index-wise unless the user needs an sdmTMB index. Biotic database refresh is a
+separate opt-in BAIT action. Use `fiskwise-workflow` to route requests spanning packs.
 
 ---
 
@@ -55,8 +64,8 @@ If a request would breach any of the above, stop and explain rather than comply.
 
 spict-wise is installed **once per machine** and used to spin up **many** stock projects —
 not cloned into each one. When set up via `spict-install`, its location is saved to
-`~/.spict-wise/config.json` and its skills are copied into the agent's user-level skills
-folder (`~/.claude/skills/` for Claude Code, `~/.agents/skills/` for Codex).
+`~/.spict-wise/config.json` and its `spict-*` skills are linked into the agent's user-level
+skills folder (`~/.claude/skills/` for Claude Code, `~/.agents/skills/` for Codex).
 
 - **Trigger:** the user asks to *"set up the `<year>` SPiCT assessment for `<stock>`"*, or to
   fit, explore, or report a SPiCT assessment.
@@ -121,6 +130,9 @@ Shared knowledge lives in `knowledge/`:
    issues before starting one.
 8. **Plan mode first.** After the questionnaire, present a plan and confirm before scaffolding
    or compiling documents.
+
+Use **`r-code-style`** for all R changes in managed projects; spict-wise's scientific
+conventions do not replace the shared R coding guidance.
 
 ---
 

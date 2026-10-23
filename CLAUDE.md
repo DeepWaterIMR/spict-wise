@@ -21,6 +21,15 @@ It builds on [wise-writing](https://github.com/DeepWaterIMR/wise-writing): `scaf
 calls that pack's `scaffold_document()` and overlays the SPiCT layer. There is one copy of the
 shared infrastructure and it lives there, not here.
 
+spict-wise owns the SPiCT method and model-specific artifacts. wise-writing owns shared
+scientific style, package-loading, project layout, and generic reporting. Use **`r-code-style`**
+for every managed R task. Keep standalone use available and install wise-writing on demand
+before scaffolding. In managed mode, follow `fiskwise-install`, `fiskwise-update`, or
+`fiskwise-uninstall`; honor saved R-install consent, disabled toggles, and `renv.lock`, and
+avoid duplicate dependency updates. The SPiCT/TMB toolchain is installed only when needed and
+permitted; index-wise and Biotic database refreshes remain separate opt-in workflows.
+Use `fiskwise-workflow` to route requests spanning packs.
+
 ## Where things are
 
 - **Skills** — `skills/spict-*/SKILL.md`. Installed globally by `skills/spict-install`.
@@ -46,6 +55,7 @@ shared infrastructure and it lives there, not here.
   the approach before scaffolding.
 - **Code review before render** — renders are slow; run `/code-review` on changed chunks first.
   See `knowledge/rendering.md`.
+- **R code style** — use the installed `r-code-style` skill for all R changes in managed work.
 - **This is a template repository, not a runnable assessment.** The documents under
   `project-template/` contain `{{STOCK_NAME}}` and other placeholders that resolve only when
   `scaffold_spict()` has run. Do not try to render them here.

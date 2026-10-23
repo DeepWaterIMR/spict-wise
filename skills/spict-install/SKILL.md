@@ -1,6 +1,6 @@
 ---
 name: spict-install
-description: Install or set up spict-wise for building SPiCT biomass-dynamic stock assessments. Use when the user says "install spict-wise", "install https://github.com/DeepWaterIMR/spict-wise", "set up spict-wise", or first asks to run a SPiCT assessment and spict-wise is not yet installed. Runs onboarding: ensure wise-writing, clone spict-wise, install skills globally, verify the spict toolchain.
+description: Install or set up spict-wise for building SPiCT biomass-dynamic stock assessments. Use when the user says "install spict-wise", "install https://github.com/DeepWaterIMR/spict-wise", "set up spict-wise", or first asks to run a SPiCT assessment and spict-wise is not yet installed. Clones the pack, installs its skills, and checks its toolchain; wise-writing is needed on demand before scaffolding.
 ---
 
 # Install spict-wise
@@ -12,12 +12,18 @@ present first.
 > Trigger: the user prompts *"install https://github.com/DeepWaterIMR/spict-wise"* (or
 > similar), or asks to run a SPiCT assessment with nothing installed yet.
 
-## Step 1 — wise-writing first
+For a direct machine-wide install, use `fiskwise-install` when the user chooses managed
+lifecycle. If this skill was invoked by that workflow, handle only spict-wise-specific checks
+and leave clone, registry, skill registration, and dependency bookkeeping to the parent. The
+standalone procedure below remains available.
+
+## Step 1 — wise-writing before scaffolding
 
 spict-wise does not carry its own project skeleton, style rules, or rendering pipeline: it
-overlays wise-writing's. Without it, `scaffold_spict()` cannot run.
+overlays wise-writing's. Installing spict-wise alone does not require wise-writing; ensure the
+shared pack is available on demand before the user asks to scaffold a project.
 
-1. Check `~/.wise-writing/config.json` first, then legacy
+1. Before scaffolding, check `~/.wise-writing/config.json` first, then legacy
    `~/.academic-writing/config.json`; both use `academic_writing_path`. If wise-writing is
    **not** installed, run its `academic-writing-install` skill
    (`install https://github.com/DeepWaterIMR/wise-writing`) before going on.
@@ -30,9 +36,9 @@ Before cloning, reuse an existing installation recorded in `~/.spict-wise/config
 legacy `~/.spict-template/config.json`; both use `spict_template_path`, and the new config takes
 precedence when both exist.
 
-Clone it beside wise-writing (read `academic_writing_path` from that config and use its parent),
-or another user-space location the user prefers. **Never clone at a filesystem root or a system
-directory** — refuse and suggest a safe location.
+Clone it beside wise-writing when that pack is already installed (read `academic_writing_path`
+from its config and use its parent), or another user-space location the user prefers. **Never
+clone at a filesystem root or a system directory** — refuse and suggest a safe location.
 
 ```bash
 git clone https://github.com/DeepWaterIMR/spict-wise "<path>/spict-wise"
@@ -43,7 +49,7 @@ duplicating it.
 
 ## Step 3 — Install the skills globally
 
-Sync the `spict-*` skill folders individually into the agent's user-level skills folder so they
+Link the `spict-*` skill folders individually into the agent's user-level skills folder so they
 work in every project:
 
 - Claude Code → `~/.claude/skills/`
@@ -53,10 +59,12 @@ work in every project:
 Leave a destination symlink in place when it resolves to that source skill; repository updates
 then appear automatically. Skip any source and destination that resolve to the same path. If a
 differing directory or link already occupies that skill's destination, move that single entry to
-a timestamped backup before copying the source skill folder there. Never copy the pack tree onto
+a timestamped backup before linking the source skill folder there. Never copy the pack tree onto
 itself, delete a skills root, or touch unrelated skill entries.
 
-Record the install in `~/.spict-wise/config.json`; legacy
+Record the install in `~/.spict-wise/config.json`. In managed mode, leave registry and pack
+config updates to `fiskwise-install`; it preserves the compatible `spict_template_path` key.
+For standalone installation, legacy
 `~/.spict-template/config.json` remains a scaffold fallback and uses the same
 `spict_template_path` key:
 
@@ -69,7 +77,11 @@ every time.
 
 ## Step 4 — Verify the toolchain
 
-`spict` is not on CRAN and compiles a TMB model, so it needs a working compiler.
+`spict` is not on CRAN and compiles a TMB model, so it needs a working compiler. In
+Fiskwise-managed mode, use its saved R-install consent and package helper; do not install or
+update dependencies a second time here. Respect disabled install toggles and project
+`renv.lock`; if installation is not permitted, report missing packages. For standalone use,
+add only missing packages with the user's authorization.
 
 ```r
 if (!requireNamespace("remotes", quietly = TRUE)) install.packages("remotes")

@@ -8,6 +8,12 @@ description: Update spict-wise to the latest version — git pull the repository
 Goal: pull the latest spict-wise and re-sync its skills, mirroring wise-writing's
 `academic-writing-update`.
 
+For a direct machine-wide update, use `fiskwise-update` when the user chooses managed lifecycle.
+If this skill was invoked by that workflow, handle only spict-wise-specific work and leave
+pulls, registry state, skill reconciliation, and dependency checks to the parent. The standalone
+procedure remains available. This skill never refreshes Biotic data; database refresh is a
+separate opt-in BAIT action.
+
 ## Step 1 — Locate the install
 
 Read `spict_template_path` from `~/.spict-wise/config.json` first. If it is missing or
@@ -26,10 +32,11 @@ If the working tree has local changes, report them and let the user decide. Do n
 work, and do not stash silently — a local change in this repo is usually an improvement
 someone meant to contribute upstream.
 
-## Step 3 — Update wise-writing too
+## Step 3 — Check wise-writing only when needed
 
-spict-wise's scaffolder calls wise-writing's, so the two drift apart if only one is
-pulled. Offer to run `academic-writing-update` in the same pass.
+spict-wise's scaffolder calls wise-writing's. If the user needs scaffolding or a shared writing
+skill and wise-writing is installed, offer `academic-writing-update` as a separate update. Do
+not make it an automatic side effect of updating spict-wise.
 
 ## Step 4 — Re-sync the skills
 
