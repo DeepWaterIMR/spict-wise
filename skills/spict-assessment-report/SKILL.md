@@ -3,6 +3,18 @@ name: spict-assessment-report
 description: Step 4 of the SPiCT workflow — write the working-group assessment chapter from the selected SPiCT run, in the group's Word template with its float numbering. Use when the assessment is settled and the chapter is due for ICES, AFWG, JRN-AFWG, or an internal IMR report.
 ---
 
+<!-- pack-resources:start -->
+**Pack resources:** resolve `spict-wise` from `~/.spict-wise/config.json` → `spict_template_path` (or
+`~/.fiskwise/config.json` → `components.spict-wise.path`). If neither exists, use the
+checkout containing this skill, or locate/obtain the pack through its install instructions.
+Paths such as `knowledge/`, `cookbook/`, `config/` and `project-template/` belong to that
+repository, not the current research directory. For a copied skill, resolve a link that
+leaves this skill's directory against the corresponding source skill under that root;
+keep bundled `references/` links relative to the skill. Never assume `../../` from an
+agent's global skills folder reaches the repository. Use absolute resolved script paths.
+<!-- pack-resources:end -->
+
+
 # Step 4 — The working-group chapter
 
 Goal: a chapter of the working group's report documenting this stock's assessment, in the

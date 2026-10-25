@@ -8,9 +8,8 @@
 #
 #   data/output/<STOCK_SLUG>_index.rds    year, est, se   (lwr and upr optional, for plots)
 #
-# The extraction below assumes the producer's named-list-of-data-frames shape. A CPUE series
-# is rarely a list; when that is what you have, delete the list indexing rather than wrapping
-# a single data frame in a list to satisfy code that expects one.
+# Versioned index-wise bundles and legacy data frames/named lists are supported.
+# Legacy inputs need an explicit review of units and uncertainty scale.
 #
 # See the pack's knowledge/indices.md before editing.
 # ─────────────────────────────────────────────────────────────────────────────────────────
@@ -34,7 +33,6 @@ raw <- readRDS(file.path(source_dir, index_file))
 
 element <- cfg$INDEX_ELEMENT
 
-metadata <- NULL
 handoff <- read_assessment_index_handoff(raw, element, cfg$INDEX_TIMING)
 metadata <- handoff$metadata
 raw <- handoff$observations
@@ -50,6 +48,9 @@ index_raw <- if (is.data.frame(raw)) {
 if (!"se" %in% names(index_raw) && "cv" %in% names(index_raw)) {
   # A CV on the natural scale is approximately the standard error on the log scale for small
   # CVs. Convert once, here, rather than in a document.
+  if (!is.numeric(index_raw$cv) || any(!is.finite(index_raw$cv) | index_raw$cv <= 0)) {
+    stop("Legacy CV values must be finite and positive.", call. = FALSE)
+  }
   index_raw$se <- sqrt(log1p(index_raw$cv^2))
 }
 
@@ -67,6 +68,8 @@ if (anyNA(index_raw$year) || any(!is.finite(index_raw$year)) ||
     anyNA(index_raw$se) || any(!is.finite(index_raw$se))) {
   stop("Index year, est, and se must all be present and finite; resolve missing years or values at the source.", call. = FALSE)
 }
+
+validate_index_observations(index_raw)
 
 index <- index_raw |>
   dplyr::select(dplyr::any_of(c("year", "est", "se", "lwr", "upr"))) |>
@@ -92,4 +95,5 @@ message(
 
 # --- Write ---------------------------------------------------------------------------------------
 
+if (!is.null(metadata)) saveRDS(metadata, file.path(output_dir, paste0(stock_slug, "_index_metadata.rds")))
 saveRDS(index, file.path(output_dir, paste0(stock_slug, "_index.rds")))

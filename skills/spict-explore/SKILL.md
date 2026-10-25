@@ -3,6 +3,18 @@ name: spict-explore
 description: Step 3 of the SPiCT workflow — explore alternative configurations, test sensitivity to priors, index variants, and settings, compare candidate fits side by side, and drive the interactive Shiny explorer. Use during a benchmark, a sensitivity analysis, or when a diagnostic in step 2 failed.
 ---
 
+<!-- pack-resources:start -->
+**Pack resources:** resolve `spict-wise` from `~/.spict-wise/config.json` → `spict_template_path` (or
+`~/.fiskwise/config.json` → `components.spict-wise.path`). If neither exists, use the
+checkout containing this skill, or locate/obtain the pack through its install instructions.
+Paths such as `knowledge/`, `cookbook/`, `config/` and `project-template/` belong to that
+repository, not the current research directory. For a copied skill, resolve a link that
+leaves this skill's directory against the corresponding source skill under that root;
+keep bundled `references/` links relative to the skill. Never assume `../../` from an
+agent's global skills folder reaches the repository. Use absolute resolved script paths.
+<!-- pack-resources:end -->
+
+
 # Step 3 — Explore alternatives
 
 Goal: understand what the assessment is sensitive to, and settle which configuration the

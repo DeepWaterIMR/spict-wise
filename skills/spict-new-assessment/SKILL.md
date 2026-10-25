@@ -3,6 +3,18 @@ name: spict-new-assessment
 description: Start a new SPiCT stock assessment project — run the structured questionnaire, confirm a plan, then scaffold a project folder from project-template with config.yaml. Use when the user says "set up a SPiCT assessment for <stock>", "scaffold a spict-wise project", or asks to start a biomass-dynamic assessment.
 ---
 
+<!-- pack-resources:start -->
+**Pack resources:** resolve `spict-wise` from `~/.spict-wise/config.json` → `spict_template_path` (or
+`~/.fiskwise/config.json` → `components.spict-wise.path`). If neither exists, use the
+checkout containing this skill, or locate/obtain the pack through its install instructions.
+Paths such as `knowledge/`, `cookbook/`, `config/` and `project-template/` belong to that
+repository, not the current research directory. For a copied skill, resolve a link that
+leaves this skill's directory against the corresponding source skill under that root;
+keep bundled `references/` links relative to the skill. Never assume `../../` from an
+agent's global skills folder reaches the repository. Use absolute resolved script paths.
+<!-- pack-resources:end -->
+
+
 # Start a new SPiCT assessment
 
 Goal: turn *"let's run a SPiCT assessment for `<stock>`"* into a scaffolded project ready for

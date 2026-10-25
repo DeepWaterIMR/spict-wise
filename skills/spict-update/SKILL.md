@@ -3,6 +3,18 @@ name: spict-update
 description: Update spict-wise to the latest version — git pull the repository and re-sync the spict-* skills into the global skills folder. Use when the user says "update spict-wise", "pull the latest spict-wise", or asks for newer SPiCT assessment recipes or skills.
 ---
 
+<!-- pack-resources:start -->
+**Pack resources:** resolve `spict-wise` from `~/.spict-wise/config.json` → `spict_template_path` (or
+`~/.fiskwise/config.json` → `components.spict-wise.path`). If neither exists, use the
+checkout containing this skill, or locate/obtain the pack through its install instructions.
+Paths such as `knowledge/`, `cookbook/`, `config/` and `project-template/` belong to that
+repository, not the current research directory. For a copied skill, resolve a link that
+leaves this skill's directory against the corresponding source skill under that root;
+keep bundled `references/` links relative to the skill. Never assume `../../` from an
+agent's global skills folder reaches the repository. Use absolute resolved script paths.
+<!-- pack-resources:end -->
+
+
 # Update spict-wise
 
 Goal: pull the latest spict-wise and re-sync its skills, mirroring wise-writing's

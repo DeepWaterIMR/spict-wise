@@ -3,6 +3,18 @@ name: spict-install
 description: Install or set up spict-wise for building SPiCT biomass-dynamic stock assessments. Use when the user says "install spict-wise", "install https://github.com/DeepWaterIMR/spict-wise", "set up spict-wise", or first asks to run a SPiCT assessment and spict-wise is not yet installed. Clones the pack, installs its skills, and checks its toolchain; wise-writing is needed on demand before scaffolding.
 ---
 
+<!-- pack-resources:start -->
+**Pack resources:** resolve `spict-wise` from `~/.spict-wise/config.json` → `spict_template_path` (or
+`~/.fiskwise/config.json` → `components.spict-wise.path`). If neither exists, use the
+checkout containing this skill, or locate/obtain the pack through its install instructions.
+Paths such as `knowledge/`, `cookbook/`, `config/` and `project-template/` belong to that
+repository, not the current research directory. For a copied skill, resolve a link that
+leaves this skill's directory against the corresponding source skill under that root;
+keep bundled `references/` links relative to the skill. Never assume `../../` from an
+agent's global skills folder reaches the repository. Use absolute resolved script paths.
+<!-- pack-resources:end -->
+
+
 # Install spict-wise
 
 Goal: get spict-wise working **once per machine** so it is available in every project — not

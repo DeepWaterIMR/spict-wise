@@ -3,6 +3,18 @@ name: spict-render
 description: Render the SPiCT project's Quarto documents safely — code-review first, run long renders detached with a log, and manage the caching toggles. Use whenever a SPiCT document needs compiling.
 ---
 
+<!-- pack-resources:start -->
+**Pack resources:** resolve `spict-wise` from `~/.spict-wise/config.json` → `spict_template_path` (or
+`~/.fiskwise/config.json` → `components.spict-wise.path`). If neither exists, use the
+checkout containing this skill, or locate/obtain the pack through its install instructions.
+Paths such as `knowledge/`, `cookbook/`, `config/` and `project-template/` belong to that
+repository, not the current research directory. For a copied skill, resolve a link that
+leaves this skill's directory against the corresponding source skill under that root;
+keep bundled `references/` links relative to the skill. Never assume `../../` from an
+agent's global skills folder reaches the repository. Use absolute resolved script paths.
+<!-- pack-resources:end -->
+
+
 # Render
 
 Goal: get the documents compiled without wasting hours on a render that was going to fail on
@@ -20,8 +32,8 @@ cost the most are the cheapest to catch by reading:
 - A path that assumes the wrong working directory.
 - A chunk label reused, so a cross-reference silently points at the wrong float.
 
-**Run `/code-review` on the changed chunks and scripts, and resolve what it finds, before
-starting an expensive render.**
+**Review changed chunks and scripts and resolve findings before an expensive render.**
+Use available review tools or a careful independent pass; `/code-review` is optional.
 
 ## What renders how
 
@@ -52,14 +64,21 @@ Run once with all four `true`; set them `false` while iterating on prose and tab
 back to `true` for the final render.
 
 **A cached diagnostic that outlived its fit is worse than no diagnostic.** When the data, the
-priors, or the settings change, delete `data/output/` rather than trusting the toggles. And
+priors, or the settings change, invalidate the affected fit and dependent diagnostics rather than trusting the toggles;
+preserve unrelated outputs and previous results. And
 never add `freeze:` or `cache:` to a document silently — Quarto's own freezing produces a
 document that disagrees with its own data, invisibly.
 
 ## Long renders
 
 A benchmark-scale render — several candidates, each with a retrospective — takes hours. Run it
-detached, with a log:
+detached, with a unique log and completion status. Use the host background facility;
+`screen` below is an optional Unix example, not a prerequisite. Create `logs/` first.
+On Windows use PowerShell `Start-Process` with redirected stdout/stderr and retain the
+process ID. Follow wise-writing’s `academic-conventions` rendering guidance for the shared
+execution and cache-provenance contract.
+
+For example:
 
 ```bash
 screen -dmS spict-render bash -c 'Rscript docs/render.R > logs/render-$(date +%F-%H%M).log 2>&1'

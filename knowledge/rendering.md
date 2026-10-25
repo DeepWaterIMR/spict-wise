@@ -40,7 +40,10 @@ Two rules around that:
 ## Long renders
 
 A benchmark-scale render — several candidate fits, each with a retrospective — takes hours. Run
-it detached, with a log:
+it detached, with a unique log and completion status. Use the host background-job facility;
+screen/tmux are optional Unix tools, and PowerShell Start-Process is a Windows alternative.
+Create logs/ first. Generic execution and cache-provenance rules live in wise-writing’s
+academic-conventions rendering reference. For example:
 
 ```bash
 screen -dmS spict-render bash -c 'Rscript docs/render.R > logs/render-$(date +%F-%H%M).log 2>&1'
@@ -73,4 +76,4 @@ sized to the page width in `R/advice_tables.R` rather than being scaled by Word.
 | Paths break when previewing one document | Documents set `knitr::opts_knit$set(root.dir = here::here())`; `.here` at the project root is what makes that work. Do not delete it |
 | Word tables float to the end of the section | `docs/render.R` post-processing did not run. Render Word through the script, not the button |
 | Heading styles wrong in the `.docx` | The wrong `reference-doc`. Check which template the YAML points at |
-| The render silently uses last year's numbers | A cache that outlived its fit. Delete `data/output/` and re-run |
+| The render silently uses last year's numbers | A cache that outlived its fit. Invalidate the affected fit and dependent diagnostics; retain unrelated results |

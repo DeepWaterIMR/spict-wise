@@ -3,6 +3,18 @@ name: spict-fit-model
 description: Step 2 of the SPiCT workflow — fit the assessment model, run the acceptance diagnostics, project the management scenarios, and write the assessment data report. Use after the data are compiled (step 1) and the user is ready to run the assessment.
 ---
 
+<!-- pack-resources:start -->
+**Pack resources:** resolve `spict-wise` from `~/.spict-wise/config.json` → `spict_template_path` (or
+`~/.fiskwise/config.json` → `components.spict-wise.path`). If neither exists, use the
+checkout containing this skill, or locate/obtain the pack through its install instructions.
+Paths such as `knowledge/`, `cookbook/`, `config/` and `project-template/` belong to that
+repository, not the current research directory. For a copied skill, resolve a link that
+leaves this skill's directory against the corresponding source skill under that root;
+keep bundled `references/` links relative to the skill. Never assume `../../` from an
+agent's global skills folder reaches the repository. Use absolute resolved script paths.
+<!-- pack-resources:end -->
+
+
 # Step 2 — Fit the model
 
 Goal: a fitted SPiCT model that passes its acceptance checks, a data report documenting it, and
