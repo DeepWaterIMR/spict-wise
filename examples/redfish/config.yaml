@@ -61,7 +61,8 @@ FIRST_DATA_YEAR: 1987
 
 # --- Index ------------------------------------------------------------------------------
 INDEX_NAME: "Over 30 cm biomass index"  # The variant used for the assessment
-INDEX_ELEMENT: "Over 30 cm biomass"     # Name (preferred) or position in the producer's list
+INDEX_ELEMENT: "Over 30 cm biomass"     # Exact selected_name in the versioned index-wise handoff
+INDEX_FILE: "assessment-index.rds"      # File copied from the index-wise project's data/output/
 INDEX_TIMING: 0.5                       # Fraction of the year the observation refers to
 INDEX_SOURCE: "https://github.com/DeepWaterIMR/index-wise"
 

@@ -51,15 +51,12 @@ assessment and this one, unrecorded, is indistinguishable from a stock that chan
 
 ### When the index comes from index-wise
 
-index-wise's step 4 exports the selected index. Its `get_index_split()` returns a **named
-list of data frames**, one per variant, each with
-`model, year, est, lwr, upr, log_est, se, se_natural, type, cv`. The beaked-redfish worked
-example takes element 2, the *over 30 cm biomass* variant, because recruitment is handled
-separately by the official age-structured assessment.
-
-`INDEX_ELEMENT` in `config.yaml` names the element to take. Set it by name rather than by
-position where the producer gives names — `[[2]]` silently becomes the wrong variant when the
-producer adds one.
+Step 4 writes a versioned `assessment-index.rds` handoff containing `schema_version = 1`,
+`selected_name`, an `observations` data frame (`year`, `est`, `lwr`, `upr`, `se`), and metadata
+for units, uncertainty, index type, timing, spatial scope, and provenance. Copy this file to
+`data/source/` and set `INDEX_FILE` and `INDEX_ELEMENT` in config. The consumer checks the
+selected name and timing against its configuration. Legacy named lists and data frames remain
+readable; positional list selection now errors so variant changes cannot silently alter inputs.
 
 ### When it comes from anywhere else
 

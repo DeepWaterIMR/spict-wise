@@ -84,10 +84,13 @@ build_spict_input <- function(catches,
 #' @param x Numeric vector of relative uncertainties.
 #' @return `x` divided by its mean.
 normalise_stdevfac <- function(x) {
-  m <- mean(x, na.rm = TRUE)
-  if (!is.finite(m) || m <= 0) stop("stdevfac values must be finite and positive.", call. = FALSE)
+  if (!is.numeric(x) || length(x) == 0L || any(!is.finite(x)) || any(x <= 0)) {
+    stop("stdevfac values must be finite and positive.", call. = FALSE)
+  }
+  m <- mean(x)
   x / m
 }
+
 
 #' Build the catch-uncertainty ramp
 #'

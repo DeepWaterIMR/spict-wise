@@ -16,6 +16,7 @@
 # ─────────────────────────────────────────────────────────────────────────────────────────
 
 source(here::here("R", "0_setup.R"))
+source(here::here("R", "index_contract.R"))
 
 stock_slug <- cfg$STOCK_SLUG
 
@@ -24,7 +25,8 @@ stock_slug <- cfg$STOCK_SLUG
 # between last year's assessment and this one, unrecorded, is indistinguishable from a stock
 # that changed.
 
-raw <- readRDS(file.path(source_dir, paste0(cfg$STOCK_CODE, "-assessment-indices.rds")))
+index_file <- cfg$INDEX_FILE %||% "assessment-index.rds"
+raw <- readRDS(file.path(source_dir, index_file))
 
 # --- Select the variant ----------------------------------------------------------------------
 # INDEX_ELEMENT names the variant. Selecting by name rather than by position matters: `[[2]]`
@@ -32,18 +34,15 @@ raw <- readRDS(file.path(source_dir, paste0(cfg$STOCK_CODE, "-assessment-indices
 
 element <- cfg$INDEX_ELEMENT
 
+metadata <- NULL
+handoff <- read_assessment_index_handoff(raw, element, cfg$INDEX_TIMING)
+metadata <- handoff$metadata
+raw <- handoff$observations
+
 index_raw <- if (is.data.frame(raw)) {
   raw
-} else if (is.character(element)) {
-  if (!element %in% names(raw)) {
-    stop(
-      "INDEX_ELEMENT '", element, "' is not one of: ", paste(names(raw), collapse = ", "),
-      call. = FALSE
-    )
-  }
-  raw[[element]]
 } else {
-  raw[[as.integer(element)]]
+  stop("INDEX_ELEMENT must be a name. Positional selection is unsupported; set the producer's selected name explicitly.", call. = FALSE)
 }
 
 # --- Adapt to the contract ---------------------------------------------------------------------
@@ -63,15 +62,26 @@ if (length(missing_cols)) {
   )
 }
 
+if (anyNA(index_raw$year) || any(!is.finite(index_raw$year)) ||
+    anyNA(index_raw$est) || any(!is.finite(index_raw$est)) ||
+    anyNA(index_raw$se) || any(!is.finite(index_raw$se))) {
+  stop("Index year, est, and se must all be present and finite; resolve missing years or values at the source.", call. = FALSE)
+}
+
 index <- index_raw |>
   dplyr::select(dplyr::any_of(c("year", "est", "se", "lwr", "upr"))) |>
-  dplyr::filter(!is.na(est), !is.na(se)) |>
   dplyr::arrange(year)
 
 # --- Check ---------------------------------------------------------------------------------------
 
 if (any(index$se <= 0)) stop("Index standard errors must be positive.", call. = FALSE)
 if (anyDuplicated(index$year)) stop("Index has duplicated years.", call. = FALSE)
+if (nrow(index) == 0L) stop("Index contains no observations.", call. = FALSE)
+
+if (!is.null(metadata)) {
+  message("Handoff metadata: ", metadata$index_type, "; ", metadata$units,
+          "; scope ", metadata$spatial_scope)
+}
 
 message(
   "Index '", if (is.character(element)) element else paste("element", element), "': ",
