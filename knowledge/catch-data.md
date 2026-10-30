@@ -26,7 +26,8 @@ Expect to replace it, not edit it.
 At IMR Deep-water, in rough order of how often they appear:
 
 - **IMR landings database** — Norwegian sales notes, taken as an internal extract. Reliable for
-  recent years; species attribution degrades going back.
+  recent years; species attribution degrades going back. Extract them with BAIT's `catch-data`
+  skill (RstoxUtils `downloadLandings()` from 2005, `readSluttseddelXLS()` before).
 - **ICES working-group spreadsheets** — multi-tab `.xlsx`, one tab per species, columns per
   country plus a total. The usual backbone of the historical series.
 - **StoX outputs** — where landings are derived from a StoX run rather than read directly.

@@ -28,6 +28,7 @@ apply. Do not download, guess at, or synthesise data to make the script run.
 
 `R/1_process_catches.R` ships as a worked example from beaked redfish. **Expect to replace it,
 not edit it** — almost every stock combines a different set of sources on a different splice.
+For Norwegian sales notes and logbooks, use BAIT's `catch-data` skill.
 
 What it must produce:
 

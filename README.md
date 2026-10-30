@@ -3,7 +3,7 @@
 # 🐟 spict-wise — Run SPiCT stock assessments with AI agents
 
 <!-- version -->
-**Version 0.2.8** (2026-10-30)
+**Version 0.2.9** (2026-10-30)
 <!-- /version -->
 
 This repository is part of [Fiskwise](https://github.com/DeepWaterIMR/fiskwise), with its [project hub](https://deepwaterimr.github.io/fiskwise/). See [MIGRATION.md](MIGRATION.md) for repository and local config migration notes.
