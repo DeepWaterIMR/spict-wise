@@ -38,6 +38,11 @@ not repeat dependency updates. Install SPiCT/TMB dependencies only when needed a
 do not install index-wise unless the user needs an sdmTMB index. Biotic database refresh is a
 separate opt-in BAIT action. Use `fiskwise-workflow` to route requests spanning packs.
 
+**Upstream:** catches from national or working-group statistics (`knowledge/catch-data.md`);
+the index from index-wise's versioned hand-off or another producer (`knowledge/indices.md`).
+**Downstream:** wise-writing's assessment chapter and advice sheet, and wise-presentations.
+A gadget-wise model of the same stock often runs beside the SPiCT assessment.
+
 ---
 
 ## ⛔ Confidentiality — keep in mind on every task

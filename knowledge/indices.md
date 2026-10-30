@@ -57,6 +57,7 @@ for units, uncertainty, index type, timing, spatial scope, and provenance. Copy 
 `data/source/` and set `INDEX_FILE` and `INDEX_ELEMENT` in config. The consumer checks the
 selected name and timing against its configuration. Legacy named lists and data frames remain
 readable; positional list selection now errors so variant changes cannot silently alter inputs.
+The canonical schema is index-wise's [assessment-index hand-off](https://github.com/DeepWaterIMR/index-wise/blob/main/knowledge/assessment-index-handoff.md).
 
 ### When it comes from anywhere else
 
