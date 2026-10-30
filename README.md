@@ -3,7 +3,7 @@
 # 🐟 spict-wise — Run SPiCT stock assessments with AI agents
 
 <!-- version -->
-**Version 0.2.4** (2026-10-25)
+**Version 0.2.5** (2026-10-30)
 <!-- /version -->
 
 This repository is part of [Fiskwise](https://github.com/DeepWaterIMR/fiskwise), with its [project hub](https://deepwaterimr.github.io/fiskwise/). See [MIGRATION.md](MIGRATION.md) for repository and local config migration notes.
@@ -24,6 +24,8 @@ Tell your agent which stock you want assessed, and it will:
 ## ✍️ Built on wise-writing
 
 spict-wise owns the **SPiCT assessment** layer. [wise-writing](https://github.com/DeepWaterIMR/wise-writing) owns the shared project layout, scientific writing style, document conventions, and rendering pipeline. The dependency is real: `scaffold.R` calls wise-writing's `scaffold_document()` and overlays the SPiCT content, so there is exactly one copy of shared infrastructure. Install wise-writing on demand before scaffolding; installing spict-wise alone does not require it.
+
+For length- and age-structured models of the same stocks, see [gadget-wise](https://github.com/DeepWaterIMR/gadget-wise) (gadget3).
 
 Use `fiskwise-workflow` for requests spanning packs and `fiskwise-install`, `fiskwise-update`,
 and `fiskwise-uninstall` for managed lifecycle. Standalone spict-wise skills remain available.
