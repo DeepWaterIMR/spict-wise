@@ -3,7 +3,7 @@
 # 🐟 spict-wise — Run SPiCT stock assessments with AI agents
 
 <!-- version -->
-**Version 0.2.5** (2026-10-30)
+**Version 0.2.6** (2026-10-30)
 <!-- /version -->
 
 This repository is part of [Fiskwise](https://github.com/DeepWaterIMR/fiskwise), with its [project hub](https://deepwaterimr.github.io/fiskwise/). See [MIGRATION.md](MIGRATION.md) for repository and local config migration notes.
@@ -56,6 +56,7 @@ install https://github.com/DeepWaterIMR/wise-writing
 
 | Step | Skill | Produces |
 |------|-------|----------|
+| Ask about or review a SPiCT fit in any project | [`spict-model`](skills/spict-model/SKILL.md) | Answers and reviews; no scaffold needed |
 | Scaffold a project (questionnaire + plan) | [`spict-new-assessment`](skills/spict-new-assessment/SKILL.md) | The project folder and `config.yaml` |
 | **1.** Compile the catches and the index | [`spict-compile-data`](skills/spict-compile-data/SKILL.md) | The two series the model is fitted to |
 | **2.** Fit, diagnose, project | [`spict-fit-model`](skills/spict-fit-model/SKILL.md) | The assessment data report and the summary object |

@@ -81,6 +81,7 @@ skills folder (`~/.claude/skills/` for Claude Code, `~/.agents/skills/` for Code
 |---|---|
 | Install / set up spict-wise | `skills/spict-install/SKILL.md` |
 | Update it (git pull + re-sync skills) | `skills/spict-update/SKILL.md` |
+| Any SPiCT question, in any project layout | `skills/spict-model/SKILL.md` |
 | **Start** a new assessment (questionnaire → scaffold) | `skills/spict-new-assessment/SKILL.md` |
 | **Step 1** — compile the catches and the index | `skills/spict-compile-data/SKILL.md` |
 | **Step 2** — fit the model and write the assessment | `skills/spict-fit-model/SKILL.md` |

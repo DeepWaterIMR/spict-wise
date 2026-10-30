@@ -1,6 +1,6 @@
 ---
 name: spict-explore
-description: Step 3 of the SPiCT workflow — explore alternative configurations, test sensitivity to priors, index variants, and settings, compare candidate fits side by side, and drive the interactive Shiny explorer. Use during a benchmark, a sensitivity analysis, or when a diagnostic in step 2 failed.
+description: Step 3 of the SPiCT workflow — explore alternative configurations, test sensitivity to priors, index variants, and settings, compare candidate fits side by side, and drive the interactive Shiny explorer. Use during a benchmark, a sensitivity analysis, or when a diagnostic in step 2 failed. For SPiCT work outside a scaffolded spict-wise project, use spict-model.
 ---
 
 <!-- pack-resources:start -->

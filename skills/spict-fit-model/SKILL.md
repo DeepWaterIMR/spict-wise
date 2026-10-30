@@ -1,6 +1,6 @@
 ---
 name: spict-fit-model
-description: Step 2 of the SPiCT workflow — fit the assessment model, run the acceptance diagnostics, project the management scenarios, and write the assessment data report. Use after the data are compiled (step 1) and the user is ready to run the assessment.
+description: Step 2 of the SPiCT workflow — fit the assessment model, run the acceptance diagnostics, project the management scenarios, and write the assessment data report. Use after the data are compiled (step 1) and the user is ready to run the assessment. For SPiCT work outside a scaffolded spict-wise project, use spict-model.
 ---
 
 <!-- pack-resources:start -->

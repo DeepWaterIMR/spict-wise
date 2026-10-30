@@ -1,6 +1,6 @@
 ---
 name: spict-compile-data
-description: Step 1 of the SPiCT workflow — compile the catch series and the abundance index into the two objects the model is fitted to, and record their provenance. Use after a SPiCT project is scaffolded and the user is ready to prepare the data.
+description: Step 1 of the SPiCT workflow — compile the catch series and the abundance index into the two objects the model is fitted to, and record their provenance. Use after a SPiCT project is scaffolded and the user is ready to prepare the data. For SPiCT work outside a scaffolded spict-wise project, use spict-model.
 ---
 
 <!-- pack-resources:start -->

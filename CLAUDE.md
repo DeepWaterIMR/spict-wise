@@ -48,8 +48,8 @@ Use `fiskwise-workflow` to route requests spanning packs.
   `~/.claude/projects/.../memory/` for project facts — that folder is only for user-level
   preferences and identity. When working *in this pack*, use `memory/` here.
 - **Skills** — when the user asks to compile data, fit, explore, or report a SPiCT assessment,
-  invoke the matching `spict-*` skill. For prose and document structure, defer to the
-  `academic-*` skills. For a survey index, defer to index-wise's `index-*` skills; for
+  invoke the matching `spict-*` skill; outside a scaffolded project, use `spict-model`. For
+  prose and document structure, defer to the `academic-*` skills. For a survey index, defer to index-wise's `index-*` skills; for
   Biotic data access, to BAIT's `biotic-*`.
 - **Plan mode** — after the questionnaire in `spict-new-assessment`, use plan mode to confirm
   the approach before scaffolding.
