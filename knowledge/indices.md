@@ -57,7 +57,8 @@ for units, uncertainty, index type, timing, spatial scope, and provenance. Copy 
 `data/source/` and set `INDEX_FILE` and `INDEX_ELEMENT` in config. The consumer checks the
 selected name and timing against its configuration. Legacy named lists and data frames remain
 readable; positional list selection now errors so variant changes cannot silently alter inputs.
-The canonical schema is index-wise's [assessment-index hand-off](https://github.com/DeepWaterIMR/index-wise/blob/main/knowledge/assessment-index-handoff.md).
+The canonical schema is index-wise's [assessment-index
+hand-off](https://github.com/DeepWaterIMR/index-wise/blob/main/knowledge/assessment-index-handoff.md).
 
 ### When it comes from anywhere else
 
@@ -71,6 +72,33 @@ If the producer emits several, the analyst is choosing one — record what they 
 "Over 30 cm because recruitment is treated separately by gadget3" is a decision; "element 2" is
 not.
 
+## Is the index pre-smoothed?
+
+SPiCT needs a standardised but **unsmoothed** index. It is a state-space model: biomass is a
+latent state with process error (`sdb`) and the index is an observation of it with observation
+error (`sdi`). It does the smoothing itself. An index that was already smoothed — a moving
+average, a spline or `s(year)` on year, or a model-based index whose years borrow strength from
+each other — is smoothed twice. Its observation errors are autocorrelated, which invalidates the
+OSA residual tests; its inter-annual variability and standard errors are understated, so `sdi`
+and `stdevfacI` are too small and the advice intervals too narrow.
+
+Ask the producer how years are linked, and flag anything other than independent year estimates:
+
+- **sdmTMB (index-wise)** — the assessment index should use `spatiotemporal = "iid"` with year
+  as a fixed effect. An `ar1` or `rw` field, `s(year)`, or `time_varying` pre-smooths it. See
+  index-wise's [assessment
+  constraint](https://github.com/DeepWaterIMR/index-wise/blob/main/knowledge/model-selection.md#the-assessment-constraint-on-the-spatiotemporal-structure).
+- **VAST** — the equivalent is IID spatiotemporal variation with year intercepts as fixed
+  effects, not an autoregressive structure on them.
+- **GLM/GAM CPUE** — year as a factor, not a smooth.
+- **Design-based** — unsmoothed by construction; check nobody averaged it afterwards.
+
+Standardisation for vessel, gear, area, or environment is wanted; smoothing the time series is
+not. If the index is pre-smoothed, ask for the unsmoothed variant before fitting. If none can be
+had, record that in the memory file and expect Ljung–Box failures in the OSA residuals. Do not
+combine several surveys by smoothing them over time; combine them in the spatiotemporal model,
+or give SPiCT several `obsI` series.
+
 ## Timing within the year
 
 `INDEX_TIMING` is the fraction of the year the index observation refers to, and it must match
@@ -81,6 +109,7 @@ half a year against the catches and shows up as a stubborn pattern in the OSA re
 
 Write `ai/memory/index-data-sources.md` with: the index type; the producer repository or script
 and the pinned commit; which surveys, years, gear, and area (or which fleet and effort metric);
-which variant was chosen and why; the structural shape on disk and whether the extraction
-needed editing; the timing offset and its justification; and how the file gets into
-`data/source/`.
+which variant was chosen and why; how years are linked in the producer's model (e.g. `iid` +
+year effect) and whether the series is pre-smoothed; the structural shape on disk and whether
+the extraction needed editing; the timing offset and its justification; and how the file gets
+into `data/source/`.

@@ -53,6 +53,11 @@ Run the checks the script already carries, and add the ones it cannot:
 - Select the variant **by name**, not by position. `[[2]]` becomes a different variant the first
   time the producer adds one.
 - Convert `cv` to `se` here, once, not in a document.
+- **Check the index is not pre-smoothed.** SPiCT smooths the series itself; an index from an
+  `ar1`/`rw` sdmTMB field, a year smoother, or a moving average is smoothed twice and leaves
+  autocorrelated residuals and too-narrow intervals. For an sdmTMB index, ask for
+  `spatiotemporal = "iid"` with year as a fixed effect. See `knowledge/indices.md`, *Is the
+  index pre-smoothed?*
 - Confirm `INDEX_TIMING` matches when the survey actually runs. A winter survey entered at 0.5
   shifts the biomass trajectory half a year against the catches, and shows up later as a
   stubborn pattern in the OSA residuals that no prior will fix.

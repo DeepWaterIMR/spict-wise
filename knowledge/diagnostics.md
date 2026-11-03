@@ -13,6 +13,8 @@ and — when one fails — says what was done about it rather than moving on.
    `plotspict.diagnostic()`: no significant autocorrelation (Ljung–Box), no significant bias
    (a *t*-test on the mean), and normality not rejected (Shapiro–Wilk). Report the *p*-values,
    not just the plot.
+   Autocorrelated index residuals often mean the index arrived pre-smoothed (an `ar1` sdmTMB
+   field, a year smoother); check that before blaming the model (`indices.md`).
 4. **Consistent retrospective pattern.** `retro()` with `nretroyears` peels, then
    `mohns_rho()`. Mohn's rho for B/B~MSY~ and F/F~MSY~ inside ±0.2 for a long-lived species is
    the usual bar; state the bar you are using and where it comes from.
