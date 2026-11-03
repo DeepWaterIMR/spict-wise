@@ -95,7 +95,7 @@ stopifnot(length(qmds) == 5L)
 
 read_header <- function(text) {
   ends <- which(trimws(text) == "---")
-  yaml::yaml.load(paste(text[(ends[1] + 1):(ends[2] - 1)], collapse = "\n"))
+  yaml::yaml.load(paste(text[(ends[1] + 1):(ends[2] - 1)], collapse = "\n"), eval.expr = FALSE)
 }
 
 for (path in qmds) {
