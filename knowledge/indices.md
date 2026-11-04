@@ -93,6 +93,8 @@ Ask the producer how years are linked, and flag anything other than independent 
 - **GLM/GAM CPUE** — year as a factor, not a smooth.
 - **Design-based** — unsmoothed by construction; check nobody averaged it afterwards.
 
+A single index year far from its neighbours can be a survey-coverage artefact rather than a stock signal: in one benchmark an unrepeated cruise over a high-density slope area made a 1.4× peak. With an IID index that year absorbs the whole anomaly, and SPiCT will read it as a stock change. Before trusting such a year, ask the producer for index-wise's influence diagnostics (region split, leave-one-cruise-out leverage, filter scenarios; [influence-diagnostics](https://github.com/DeepWaterIMR/index-wise/blob/main/knowledge/influence-diagnostics.md)).
+
 Standardisation for vessel, gear, area, or environment is wanted; smoothing the time series is
 not. If the index is pre-smoothed, ask for the unsmoothed variant before fitting. If none can be
 had, record that in the memory file and expect Ljung–Box failures in the OSA residuals. Do not
